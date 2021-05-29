@@ -13,6 +13,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    ToDo.h \
     mainwindow.h
 
 FORMS += \
