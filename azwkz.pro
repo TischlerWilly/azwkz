@@ -9,14 +9,23 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Klassen/kostenstelle.cpp \
+    Klassen/kostenstellen.cpp \
+    Klassen/text_zeilenweise.cpp \
+    dialog_kostenstellen.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    Klassen/kostenstelle.h \
+    Klassen/kostenstellen.h \
+    Klassen/text_zeilenweise.h \
     ToDo.h \
+    dialog_kostenstellen.h \
     mainwindow.h
 
 FORMS += \
+    dialog_kostenstellen.ui \
     mainwindow.ui
 
 # Default rules for deployment.

@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "dialog_kostenstellen.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -15,7 +17,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_actionKostenstellen_triggered();
+
 private:
     Ui::MainWindow *ui;
+    Dialog_Kostenstellen Dlg_KoSt;
 };
 #endif // MAINWINDOW_H

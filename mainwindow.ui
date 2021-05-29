@@ -14,8 +14,35 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuStammdaten">
+    <property name="title">
+     <string>Stammdaten</string>
+    </property>
+    <addaction name="actionKostenstellen"/>
+    <addaction name="actionMitarbeiter"/>
+   </widget>
+   <addaction name="menuStammdaten"/>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionKostenstellen">
+   <property name="text">
+    <string>Kostenstellen</string>
+   </property>
+  </action>
+  <action name="actionMitarbeiter">
+   <property name="text">
+    <string>Mitarbeiter</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
