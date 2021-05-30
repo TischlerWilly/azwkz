@@ -19,9 +19,14 @@ public:
 private slots:
     void on_pushButton_abbrechen_clicked();
 
+    void on_pushButton_ok_clicked();
+
 private:
     Ui::Dialog_Kostenstellen *ui;
     kostenstellen KoSten;
+
+protected:
+ void showEvent(QShowEvent *e);
 };
 
 #endif // DIALOG_KOSTENSTELLEN_H

@@ -5,11 +5,12 @@ Dialog_Kostenstellen::Dialog_Kostenstellen(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog_Kostenstellen)
 {
-    ui->setupUi(this);
-    KoSten.initialisieren();
+    ui->setupUi(this);    
+}
 
-    //Row = Zeile
-    //Column = Spalte
+void Dialog_Kostenstellen::showEvent(QShowEvent *e)
+{
+    KoSten.initialisieren();
     kostenstelle k;
     ui->tableWidget_kost->setColumnCount(2);//Spaltenanzahl
     ui->tableWidget_kost->setRowCount(2);//Zeilenanzahl
@@ -30,6 +31,7 @@ Dialog_Kostenstellen::Dialog_Kostenstellen(QWidget *parent) :
         ui->tableWidget_kost->setItem(i,0, new QTableWidgetItem(zeile.zeile(1)));
         ui->tableWidget_kost->setItem(i,1, new QTableWidgetItem(zeile.zeile(2)));
     }
+   QDialog::showEvent(e);
 }
 
 Dialog_Kostenstellen::~Dialog_Kostenstellen()
@@ -40,4 +42,9 @@ Dialog_Kostenstellen::~Dialog_Kostenstellen()
 void Dialog_Kostenstellen::on_pushButton_abbrechen_clicked()
 {
     this->close();
+}
+
+void Dialog_Kostenstellen::on_pushButton_ok_clicked()
+{
+    KoSten.speichern();
 }

@@ -92,6 +92,7 @@ void kostenstellen::speichern()
         tmp = k.tabkopf().text().replace("\n",";");
         tmp += "\n";
         tmp += tabelle().text();
+        tmp += "\n";
         tmp += "#ENDE#";
         f.write(tmp.toUtf8());
     }
