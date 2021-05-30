@@ -14,6 +14,11 @@ in Arbeit:
 
 dlg KoSt
 
+void Dialog_Kostenstellen::on_pushButton_ok_clicked()
+    ->signal einbauen an Mainwindow damit programm-neustart nicht nötig ist
+
+void Dialog_Kostenstellen::on_tableWidget_kost_cellChanged(int row, int column)
+    ->fertig stellen
 
 
 

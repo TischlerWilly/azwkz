@@ -21,6 +21,8 @@ private slots:
 
     void on_pushButton_ok_clicked();
 
+    void on_tableWidget_kost_cellChanged(int row, int column);
+
 private:
     Ui::Dialog_Kostenstellen *ui;
     kostenstellen KoSten;

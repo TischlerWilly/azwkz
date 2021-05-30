@@ -17,6 +17,7 @@ public:
     void initialisieren();
     void speichern();
     void clear();
+    bool set_bez(QString nr, QString bez);
 
     text_zeilenweise tabelle();
 

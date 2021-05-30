@@ -102,6 +102,20 @@ void kostenstellen::clear()
 {
     KoSt.clear();
 }
+bool kostenstellen::set_bez(QString nr, QString bez)
+{
+    bool retbool = false;
+    for(int i=0;i<KoSt.count();i++)
+    {
+        if(KoSt[i].nr()==nr)
+        {
+            retbool = true;
+            KoSt[i].set_bez(bez);
+            break;
+        }
+    }
+    return retbool;
+}
 //-------------get:
 text_zeilenweise kostenstellen::tabelle()
 {
@@ -123,7 +137,7 @@ bool kostenstellen::exist(kostenstelle k)
  bool retbool = false;
  for(int i=0;i<KoSt.count();i++)
  {
-     if(KoSt.at(i)==k)
+     if(KoSt[i].nr()==k.nr())
      {
          retbool = true;
          break;
