@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    prgpf.ordner_erstellen();
+    KoSten.initialisieren();
 }
 
 MainWindow::~MainWindow()

@@ -30,7 +30,14 @@
     <addaction name="actionKostenstellen"/>
     <addaction name="actionMitarbeiter"/>
    </widget>
+   <widget class="QMenu" name="menuEinstellungen">
+    <property name="title">
+     <string>Einstellungen</string>
+    </property>
+    <addaction name="actionBenutzerverwaltung"/>
+   </widget>
    <addaction name="menuStammdaten"/>
+   <addaction name="menuEinstellungen"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionKostenstellen">
@@ -41,6 +48,11 @@
   <action name="actionMitarbeiter">
    <property name="text">
     <string>Mitarbeiter</string>
+   </property>
+  </action>
+  <action name="actionBenutzerverwaltung">
+   <property name="text">
+    <string>Benutzerverwaltung</string>
    </property>
   </action>
  </widget>

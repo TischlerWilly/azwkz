@@ -21,6 +21,7 @@ private slots:
 
 private:
     Ui::Dialog_Kostenstellen *ui;
+    kostenstellen KoSten;
 };
 
 #endif // DIALOG_KOSTENSTELLEN_H

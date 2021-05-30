@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 
-#include "dialog_kostenstellen.h"
+#include "Dialoge/dialog_kostenstellen.h"
+#include "Klassen/prgpfade.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,6 +23,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    kostenstellen KoSten;
     Dialog_Kostenstellen Dlg_KoSt;
+    prgpfade prgpf;
 };
 #endif // MAINWINDOW_H
