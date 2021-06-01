@@ -32,6 +32,20 @@ bool kostenstellen::del(kostenstelle k)
     }
     return retbool;
 }
+bool kostenstellen::del(QString nr)
+{
+    bool retbool = false;
+    for(int i=0;i<KoSt.count();i++)
+    {
+        if(KoSt[i].nr()==nr)
+        {
+            retbool = true;
+            KoSt.erase(KoSt.begin()+i);
+            break;
+        }
+    }
+    return retbool;
+}
 void kostenstellen::initialisieren()
 {
     QFile file(prgpf.path_KoStFile());
@@ -130,7 +144,19 @@ text_zeilenweise kostenstellen::tabelle()
     }
     return tab;
 }
-
+kostenstelle kostenstellen::kost(QString nr)
+{
+    kostenstelle k;
+    for(int i=0;i<KoSt.count();i++)
+    {
+        if(KoSt[i].nr()==nr)
+        {
+            k = KoSt.at(i);
+            break;
+        }
+    }
+    return k;
+}
 //-----------------private:
 bool kostenstellen::exist(kostenstelle k)
 {

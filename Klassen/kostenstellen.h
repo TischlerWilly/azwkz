@@ -14,12 +14,14 @@ public:
     kostenstellen();
     bool add(kostenstelle k);
     bool del(kostenstelle k);
+    bool del(QString nr);
     void initialisieren();
     void speichern();
     void clear();
     bool set_bez(QString nr, QString bez);
 
     text_zeilenweise tabelle();
+    kostenstelle kost(QString nr);
 
 private:
     QVector<kostenstelle> KoSt; //Kostenstellen

@@ -1,7 +1,7 @@
 #ifndef TODO_H
 #define TODO_H
 
-#define PROGRAMMVERSION     "1.2021.05.30"
+#define PROGRAMMVERSION     "1.2021.06.01"
 /*#############################################################################
 Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 - Variablen beginnen mit einem großen Buchstaben
@@ -17,8 +17,10 @@ dlg KoSt
 void Dialog_Kostenstellen::on_pushButton_ok_clicked()
     ->signal einbauen an Mainwindow damit programm-neustart nicht nötig ist
 
-void Dialog_Kostenstellen::on_tableWidget_kost_cellChanged(int row, int column)
-    ->fertig stellen
+
+void Dialog_Kostenstellen::kostenstellen_sortieren()
+
+void Dialog_Kostenstellen::resizeEvent(QResizeEvent *event)
 
 
 
