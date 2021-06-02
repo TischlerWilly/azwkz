@@ -72,7 +72,7 @@ void Dialog_Kostenstellen::zeile_anhaengen()
 }
 void Dialog_Kostenstellen::kostenstellen_sortieren()
 {
-
+    KoSten.sortieren();
 }
 void Dialog_Kostenstellen::on_pushButton_abbrechen_clicked()
 {

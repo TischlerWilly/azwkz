@@ -19,6 +19,7 @@ public:
     void speichern();
     void clear();
     bool set_bez(QString nr, QString bez);
+    void sortieren();
 
     text_zeilenweise tabelle();
     kostenstelle kost(QString nr);
