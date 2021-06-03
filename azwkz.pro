@@ -14,6 +14,7 @@ SOURCES += \
     Klassen/kostenstellen.cpp \
     Klassen/liste_qstring.cpp \
     Klassen/prgpfade.cpp \
+    Klassen/tabelle_qstring.cpp \
     Klassen/text_zeilenweise.cpp \
     Dialoge/dialog_kostenstellen.cpp \
     main.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     Klassen/kostenstellen.h \
     Klassen/liste_qstring.h \
     Klassen/prgpfade.h \
+    Klassen/tabelle_qstring.h \
     Klassen/text_zeilenweise.h \
     ToDo.h \
     Dialoge/dialog_kostenstellen.h \
