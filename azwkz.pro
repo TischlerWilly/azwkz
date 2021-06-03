@@ -12,6 +12,7 @@ SOURCES += \
     Dialoge/dialog_mitarbeiter.cpp \
     Klassen/kostenstelle.cpp \
     Klassen/kostenstellen.cpp \
+    Klassen/liste_qstring.cpp \
     Klassen/prgpfade.cpp \
     Klassen/text_zeilenweise.cpp \
     Dialoge/dialog_kostenstellen.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     Dialoge/dialog_mitarbeiter.h \
     Klassen/kostenstelle.h \
     Klassen/kostenstellen.h \
+    Klassen/liste_qstring.h \
     Klassen/prgpfade.h \
     Klassen/text_zeilenweise.h \
     ToDo.h \

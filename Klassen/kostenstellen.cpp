@@ -157,7 +157,7 @@ void kostenstellen::sortieren()
         double dalt = zeile.zeile(posverglwert).toDouble();
         zeile.set_text(neu.zeile(1));
         double dneu = zeile.zeile(posverglwert).toDouble();
-        if(dneu >= dalt)
+        if(dalt >= dneu)
         {
             neu.zeile_anhaengen(alt.zeile(1));
         }else
@@ -204,14 +204,10 @@ void kostenstellen::sortieren()
                 }
             }
         }
+        QMessageBox mb;
+        mb.setText(neu.text());
+        mb.exec();
     }
-
-
-    QString msg;
-    msg = neu.text();
-    QMessageBox mb;
-    mb.setText(msg);
-    mb.exec();
 }
 //-------------get:
 text_zeilenweise kostenstellen::tabelle()
