@@ -2,31 +2,68 @@
 
 kostenstellen::kostenstellen()
 {
-
+    liste_QString tabkoft;
+    tabkoft.anhaengen("Nummer");
+    tabkoft.anhaengen("Bezeichnung");
+    KoSt.set_tabkopf(tabkoft);
 }
 
 //-----------------public:
 //-------------set:
-bool kostenstellen::add(kostenstelle k)
+bool kostenstellen::add(kostenstelle k)//später entfernen
 {
     if(exist(k))
     {
         return false;
     }else
     {
-        KoSt.push_back(k);
+        KoSt_.push_back(k);
         return true;
     }
 }
-bool kostenstellen::del(kostenstelle k)
+bool kostenstellen::add(liste_QString k)
+{
+    bool existiert = false;
+    for(int i=0;i<KoSt.anz_zeilen();i++)
+    {
+        if(k.wert(INDEX_NUMMER) == KoSt.wert(i, INDEX_NUMMER))
+        {
+            existiert = true;
+            break;
+        }
+    }
+    if(!existiert)
+    {
+        KoSt.zeile_anhaengen(k);
+        return true;
+    }else
+    {
+        return  false;
+    }
+}
+bool kostenstellen::del(kostenstelle k)//später entfernen
 {
     bool retbool = false;
-    for(int i=0;i<KoSt.count();i++)
+    for(int i=0;i<KoSt_.count();i++)
     {
-        if(KoSt.at(i)==k)
+        if(KoSt_.at(i)==k)
         {
             retbool = true;
-            KoSt.erase(KoSt.begin()+i);
+            KoSt_.erase(KoSt_.begin()+i);
+            break;
+        }
+    }
+    return retbool;
+}
+bool kostenstellen::del(liste_QString k)
+{
+    bool retbool = false;
+    for(int i=0;i<KoSt.anz_zeilen();i++)
+    {
+        if(k.wert(INDEX_NUMMER) == KoSt.wert(i, INDEX_NUMMER))
+        {
+            retbool = true;
+            KoSt.zeile_entfernen(i);
             break;
         }
     }
@@ -35,15 +72,26 @@ bool kostenstellen::del(kostenstelle k)
 bool kostenstellen::del(QString nr)
 {
     bool retbool = false;
-    for(int i=0;i<KoSt.count();i++)
+    for(int i=0;i<KoSt.anz_zeilen();i++)
     {
-        if(KoSt[i].nr()==nr)
+        if(nr == KoSt.wert(i, INDEX_NUMMER))
         {
             retbool = true;
-            KoSt.erase(KoSt.begin()+i);
+            KoSt.zeile_entfernen(i);
             break;
         }
     }
+    //----------------------------------------------------------später entfernen:
+    for(int i=0;i<KoSt_.count();i++)
+    {
+        if(KoSt_[i].nr()==nr)
+        {
+            retbool = true;
+            KoSt_.erase(KoSt_.begin()+i);
+            break;
+        }
+    }
+    //-----------------------------------------------------------------
     return retbool;
 }
 void kostenstellen::initialisieren()
@@ -63,7 +111,7 @@ void kostenstellen::initialisieren()
             QMessageBox::warning(new QDialog,"Fehler",tmp,QMessageBox::Ok);
         }else
         {
-            KoSt.clear();
+            KoSt_.clear();
             text_zeilenweise tz;
             tz.set_text(file.readAll());
             for(uint i=2;i<=tz.zeilenanzahl();i++)//mit Zeile 2 beginnen weil 1.Zeile==Tabellenkopf
@@ -105,7 +153,7 @@ void kostenstellen::speichern()
         QString tmp;
         tmp = k.tabkopf().text().replace("\n",";");
         tmp += "\n";
-        tmp += tabelle().text();
+        tmp += tabelle_tz().text();
         tmp += "\n";
         tmp += "#ENDE#";
         f.write(tmp.toUtf8());
@@ -115,19 +163,31 @@ void kostenstellen::speichern()
 void kostenstellen::clear()
 {
     KoSt.clear();
+    KoSt_.clear();//später entfernen
 }
 bool kostenstellen::set_bez(QString nr, QString bez)
 {
     bool retbool = false;
-    for(int i=0;i<KoSt.count();i++)
+    for(int i=0;i<KoSt.anz_zeilen();i++)
     {
-        if(KoSt[i].nr()==nr)
+        if(nr == KoSt.wert(i, INDEX_NUMMER))
         {
             retbool = true;
-            KoSt[i].set_bez(bez);
+            KoSt.set_wert(i, INDEX_BEZEICHUNG, bez);
             break;
         }
     }
+    //----------------------------------------------------------später entfernen:
+    for(int i=0;i<KoSt_.count();i++)
+    {
+        if(KoSt_[i].nr()==nr)
+        {
+            retbool = true;
+            KoSt_[i].set_bez(bez);
+            break;
+        }
+    }
+    //----------------------------------------------------------
     return retbool;
 }
 void kostenstellen::sortieren()
@@ -136,10 +196,10 @@ void kostenstellen::sortieren()
     text_zeilenweise zeile;
     zeile.set_trennzeichen('\t');
     //Vector in tz überführen:
-    for(int i=0;i<KoSt.count();i++)
+    for(int i=0;i<KoSt_.count();i++)
     {
-        zeile.set_text(KoSt[i].nr());
-        zeile.zeile_anhaengen(KoSt[i].bez());
+        zeile.set_text(KoSt_[i].nr());
+        zeile.zeile_anhaengen(KoSt_[i].bez());
         alt.zeile_anhaengen(zeile.text());
     }
     //tz sortieren(double vergleichen):
@@ -210,39 +270,46 @@ void kostenstellen::sortieren()
     }
 }
 //-------------get:
-text_zeilenweise kostenstellen::tabelle()
+text_zeilenweise kostenstellen::tabelle_tz()
 {
-    text_zeilenweise tab;
+    text_zeilenweise tab;    
+    for(int i=0;i<KoSt.anz_zeilen();i++)
+    {
+        tab.zeile_anhaengen(KoSt.zeile(i).tz(';').text());
+    }
+    //----------------------------------------------------------später entfernen:
+    tab.clear();
     text_zeilenweise zeile;
     zeile.set_trennzeichen(';');
-    for(int i=0;i<KoSt.count();i++)
+    for(int i=0;i<KoSt_.count();i++)
     {
-        zeile.set_text(KoSt[i].nr());
-        zeile.zeile_anhaengen(KoSt[i].bez());
+        zeile.set_text(KoSt_[i].nr());
+        zeile.zeile_anhaengen(KoSt_[i].bez());
         tab.zeile_anhaengen(zeile.text());
     }
+    //----------------------------------------------------------
     return tab;
 }
-kostenstelle kostenstellen::kost(QString nr)
+kostenstelle kostenstellen::kost(QString nr)//später entfernen
 {
     kostenstelle k;
-    for(int i=0;i<KoSt.count();i++)
+    for(int i=0;i<KoSt_.count();i++)
     {
-        if(KoSt[i].nr()==nr)
+        if(KoSt_[i].nr()==nr)
         {
-            k = KoSt.at(i);
+            k = KoSt_.at(i);
             break;
         }
     }
     return k;
 }
 //-----------------private:
-bool kostenstellen::exist(kostenstelle k)
+bool kostenstellen::exist(kostenstelle k)//später entfernen
 {
  bool retbool = false;
- for(int i=0;i<KoSt.count();i++)
+ for(int i=0;i<KoSt_.count();i++)
  {
-     if(KoSt[i].nr()==k.nr())
+     if(KoSt_[i].nr()==k.nr())
      {
          retbool = true;
          break;

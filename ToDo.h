@@ -17,7 +17,12 @@ dlg KoSt
 void Dialog_Kostenstellen::on_pushButton_ok_clicked()
     ->signal einbauen an Mainwindow damit programm-neustart nicht nötig ist
 
-Klasse "tabelle_qstring" schreiben
+Klasse Kostenstelle entfernen
+    Klasse Kostenstellen umschreiben
+        void kostenstellen::initialisieren()
+        void kostenstellen::speichern()
+        void kostenstellen::sortieren()
+    Dialog Kostenstellen umstellen
 
 void kostenstellen::sortieren()
     -> ggf eine allgemeine Funktion für tz daraus machen

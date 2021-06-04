@@ -11,6 +11,17 @@ void tabelle_qstring::set_tabkopf(liste_QString kopf)
     clear();
     Tabkopf = kopf;
 }
+bool tabelle_qstring::set_wert(int index_zeile, int indes_spalte, QString wert)
+{
+    if(index_zeile < anz_zeilen() && indes_spalte < anz_spalten())
+    {
+        Liqs[index_zeile].ersaetzen(indes_spalte, wert);
+        return true;
+    }else
+    {
+        return false;
+    }
+}
 bool tabelle_qstring::zeile_anhaengen(liste_QString zeile)
 {
     if(zeile.count() != anz_spalten())
@@ -53,6 +64,16 @@ void tabelle_qstring::clear()
     Liqs.clear();
     Tabkopf.clear();
 }
-
+bool tabelle_qstring::zeile_entfernen(int index)
+{
+    if(index < Liqs.count())
+    {
+        Liqs.remove(index);
+        return true;
+    }else
+    {
+        return false;
+    }
+}
 
 

@@ -34,7 +34,7 @@ void Dialog_Kostenstellen::showEvent(QShowEvent *e)
     ui->tableWidget_kost->setColumnWidth(0,60);//nr
     ui->tableWidget_kost->setColumnWidth(1,200);//bez
 
-    text_zeilenweise tab = KoSten.tabelle();
+    text_zeilenweise tab = KoSten.tabelle_tz();
     text_zeilenweise zeile;
     zeile.set_trennzeichen(';');
     for(uint i=1;i<=tab.zeilenanzahl();i++)

@@ -9,6 +9,7 @@ public:
     tabelle_qstring();
     //set_xy:
     void set_tabkopf(liste_QString kopf);
+    bool set_wert(int index_zeile, int indes_spalte ,QString wert);
     bool zeile_anhaengen(liste_QString zeile);
 
     //get_xy:
@@ -19,6 +20,7 @@ public:
 
     //Manipulationen:
     void clear();
+    bool zeile_entfernen(int index);
 
 private:
     liste_QString Tabkopf;
