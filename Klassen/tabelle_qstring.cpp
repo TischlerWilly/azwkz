@@ -3,6 +3,7 @@
 tabelle_qstring::tabelle_qstring()
 {
     clear();
+    tabkopf().clear();
 }
 
 //----------------set_xy:
@@ -25,7 +26,7 @@ bool tabelle_qstring::set_wert(int index_zeile, int indes_spalte, QString wert)
 bool tabelle_qstring::zeile_anhaengen(liste_QString zeile)
 {
     if(zeile.count() != anz_spalten())
-    {
+    {        
         return false;
     }else
     {
@@ -44,9 +45,31 @@ int tabelle_qstring::anz_zeilen()
 {
     return Liqs.count();
 }
-liste_QString tabelle_qstring::zeile(uint index)
+text_zeilenweise tabelle_qstring::tabelle_tz(char trennz_zeile, char trennz_spalte)
 {
-    return Liqs.at(index);
+    text_zeilenweise tz;
+    tz.set_trennzeichen(trennz_zeile);
+    for(int i=0;i<anz_zeilen();i++)
+    {
+        tz.zeile_anhaengen(zeile(i).tz(trennz_spalte).text());
+    }
+    return tz;;
+}
+liste_QString tabelle_qstring::zeile(int index)
+{
+    if((index >= 0) && (index < Liqs.count()))
+    {
+        return Liqs.at(index);
+    }else
+    {
+        liste_QString tmp;
+        return tmp;
+    }
+
+}
+liste_QString tabelle_qstring::tabkopf()
+{
+    return Tabkopf;
 }
 QString tabelle_qstring::wert(int zeile, int spalte)
 {
@@ -62,7 +85,6 @@ QString tabelle_qstring::wert(int zeile, int spalte)
 void tabelle_qstring::clear()
 {
     Liqs.clear();
-    Tabkopf.clear();
 }
 bool tabelle_qstring::zeile_entfernen(int index)
 {
@@ -73,6 +95,67 @@ bool tabelle_qstring::zeile_entfernen(int index)
     }else
     {
         return false;
+    }
+}
+void tabelle_qstring::sortieren_double(int index_sortierspalte)
+{
+    //Diese Funktion sorteiert die tabelle basierend auf den Werten in Spalte
+    //"index_sortierspalte" um
+    //verglichen werden die in double umgewandelten Werte
+
+    if(Liqs.count()>1)
+    {
+        QVector<liste_QString> liqs_neu;
+        //1. Zeile einfach verschieben:
+        liqs_neu.push_back(Liqs.at(0));
+        Liqs.erase(0);
+        //2. Zeile davor oder dannach:
+        double dalt = Liqs[0].wert(index_sortierspalte).toDouble();
+        double dneu = liqs_neu[0].wert(index_sortierspalte).toDouble();
+        if(dalt >= dneu)
+        {
+            liqs_neu.push_back(Liqs.at(0));
+        }else
+        {
+            liqs_neu.push_front(Liqs.at(0));
+        }
+        Liqs.erase(0);
+        //restliche werte einsortieren:
+        while(Liqs.count()>=1)
+        {
+            dalt = Liqs[0].wert(index_sortierspalte).toDouble();
+            dneu = liqs_neu[0].wert(index_sortierspalte).toDouble();
+            if(dalt <= dneu)//Wenn alt <= erster Wert von neu
+            {
+                liqs_neu.push_front(Liqs.at(0));
+                Liqs.erase(0);
+            }else
+            {
+                dneu = liqs_neu[liqs_neu.count()-1].wert(index_sortierspalte).toDouble();
+                if(dalt >= dneu)//Wenn alt >= letzter Wert von neu
+                {
+                    liqs_neu.push_back(Liqs.at(0));
+                    Liqs.erase(0);
+                }else//der Wert gehört irgendwo in die Mitte
+                {
+                    for(int i=0;i<liqs_neu.count()-2;i++)
+                    {
+                        double daktzei;//Wert der aktuellen Zeile
+                        daktzei = liqs_neu[i].wert(index_sortierspalte).toDouble();
+                        double dfolzei;//Wert der nächsten Zeile
+                        dfolzei = liqs_neu[i+1].wert(index_sortierspalte).toDouble();
+                        if((dalt >= daktzei) && (dalt <=dfolzei))
+                        {
+                            liqs_neu.insert(i, Liqs.at(0));
+                            Liqs.erase(0);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        //Werte zurückspeichern:
+        Liqs = liqs_neu;
     }
 }
 

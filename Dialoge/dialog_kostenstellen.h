@@ -29,7 +29,7 @@ private slots:
 
 private:
     Ui::Dialog_Kostenstellen *ui;
-    kostenstellen KoSten;
+    kostenstellen KoSt;
     bool tabellenupdate;
     QString daten_vor_aenderung;
 

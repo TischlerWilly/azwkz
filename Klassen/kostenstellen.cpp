@@ -2,10 +2,10 @@
 
 kostenstellen::kostenstellen()
 {
-    liste_QString tabkoft;
-    tabkoft.anhaengen("Nummer");
-    tabkoft.anhaengen("Bezeichnung");
-    KoSt.set_tabkopf(tabkoft);
+    liste_QString tabkopf;
+    tabkopf.anhaengen("Nummer");
+    tabkopf.anhaengen("Bezeichnung");
+    KoSt.set_tabkopf(tabkopf);
 }
 
 //-----------------public:
@@ -111,7 +111,7 @@ void kostenstellen::initialisieren()
             QMessageBox::warning(new QDialog,"Fehler",tmp,QMessageBox::Ok);
         }else
         {
-            KoSt_.clear();
+            KoSt.clear();
             text_zeilenweise tz;
             tz.set_text(file.readAll());
             for(uint i=2;i<=tz.zeilenanzahl();i++)//mit Zeile 2 beginnen weil 1.Zeile==Tabellenkopf
@@ -125,12 +125,9 @@ void kostenstellen::initialisieren()
                     text_zeilenweise tzkost;
                     tzkost.set_trennzeichen(';');
                     tzkost.set_text(zeile);
-                    QString nr  = tzkost.zeile(1);
-                    QString bez = tzkost.zeile(2);
-                    kostenstelle k;
-                    k.set_nr(nr);
-                    k.set_bez(bez);
-                    add(k);
+                    liste_QString lqs;
+                    lqs.von_tz(tzkost);
+                    KoSt.zeile_anhaengen(lqs);
                 }
             }
         }
@@ -149,6 +146,7 @@ void kostenstellen::speichern()
         QMessageBox::warning(new QDialog,"Fehler", tmp, QMessageBox::Ok);
     }else
     {
+        /*
         kostenstelle k;
         QString tmp;
         tmp = k.tabkopf().text().replace("\n",";");
@@ -156,6 +154,9 @@ void kostenstellen::speichern()
         tmp += tabelle_tz().text();
         tmp += "\n";
         tmp += "#ENDE#";
+        */
+        QString tmp;
+        tmp = KoSt.tabkopf().tz(';').text();
         f.write(tmp.toUtf8());
     }
     f.close();
@@ -190,7 +191,7 @@ bool kostenstellen::set_bez(QString nr, QString bez)
     //----------------------------------------------------------
     return retbool;
 }
-void kostenstellen::sortieren()
+void kostenstellen::sortieren()//später entfernen
 {
     text_zeilenweise alt, neu;
     text_zeilenweise zeile;
@@ -289,6 +290,10 @@ text_zeilenweise kostenstellen::tabelle_tz()
     }
     //----------------------------------------------------------
     return tab;
+}
+tabelle_qstring kostenstellen::tabelle()
+{
+    return KoSt;
 }
 kostenstelle kostenstellen::kost(QString nr)//später entfernen
 {

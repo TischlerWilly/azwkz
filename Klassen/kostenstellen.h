@@ -25,6 +25,7 @@ public:
     void sortieren();
 
     text_zeilenweise tabelle_tz();
+    tabelle_qstring tabelle();
     kostenstelle kost(QString nr);
 
 private:

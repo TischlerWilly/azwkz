@@ -19,10 +19,10 @@ void Dialog_Kostenstellen::on_pushButton_ok_clicked()
 
 Klasse Kostenstelle entfernen
     Klasse Kostenstellen umschreiben
-        void kostenstellen::initialisieren()
-        void kostenstellen::speichern()
-        void kostenstellen::sortieren()
-    Dialog Kostenstellen umstellen
+        void kostenstellen::initialisieren() ok
+        void kostenstellen::speichern() ok
+        void kostenstellen::sortieren() ok
+    Dialog Kostenstellen umstellen --> begonnen
 
 void kostenstellen::sortieren()
     -> ggf eine allgemeine Funktion für tz daraus machen

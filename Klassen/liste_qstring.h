@@ -2,6 +2,7 @@
 #define LISTE_QSTRING_H
 
 #include <QString>
+#include <QStringList>
 #include "text_zeilenweise.h"
 
 class liste_QString
@@ -20,6 +21,7 @@ public:
 
     //get_xy:
     text_zeilenweise tz(char trennzeichen);
+    QStringList qstringlist();
     QString wert(int index);
     text_zeilenweise werte_tz(int index, int anz_werte);
     liste_QString werte_liste(int index, int anz_werte);

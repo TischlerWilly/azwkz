@@ -19,39 +19,18 @@ void Dialog_Kostenstellen::showEvent(QShowEvent *e)
 {
     daten_vor_aenderung.clear();
     ui->tableWidget_kost->clear();
-    KoSten.initialisieren();
-    kostenstelle k;    
-    text_zeilenweise tz;
-    tz = k.tabkopf();
-    ui->tableWidget_kost->setColumnCount(tz.zeilenanzahl());//Spaltenanzahl
-    ui->tableWidget_kost->setRowCount(1);//Zeilenanzahl
-    QStringList tabkopf;
-    for(uint i=1;i<=tz.zeilenanzahl();i++)
-    {
-        tabkopf << tz.zeile(i);
-    }
-    ui->tableWidget_kost->setHorizontalHeaderLabels(tabkopf);
+    KoSt.initialisieren();
+    ui->tableWidget_kost->setColumnCount(KoSt.tabelle().anz_spalten());//Spaltenanzahl
+    ui->tableWidget_kost->setRowCount(KoSt.tabelle().anz_zeilen());//Zeilenanzahl
+    ui->tableWidget_kost->setHorizontalHeaderLabels(KoSt.tabelle().tabkopf().qstringlist());
     ui->tableWidget_kost->setColumnWidth(0,60);//nr
     ui->tableWidget_kost->setColumnWidth(1,200);//bez
 
-    text_zeilenweise tab = KoSten.tabelle_tz();
-    text_zeilenweise zeile;
-    zeile.set_trennzeichen(';');
-    for(uint i=1;i<=tab.zeilenanzahl();i++)
+    for(int i=0;i<KoSt.tabelle().anz_zeilen();i++)
     {
-        zeile.set_text(tab.zeile(i));
-        for(uint ii=1;ii<=zeile.zeilenanzahl();ii++)
+        for(int ii=0;ii<=KoSt.tabelle().anz_spalten();ii++)
         {
-            tabellenupdate = true;
-            ui->tableWidget_kost->setItem(i-1,ii-1, new QTableWidgetItem(zeile.zeile(ii)));
-        }
-        if(i==tab.zeilenanzahl())
-        {//Ein zusätzlicher durchlauf der leere items einfügt:
-            for(uint ii=1;ii<=zeile.zeilenanzahl();ii++)
-            {
-                tabellenupdate = true;
-                ui->tableWidget_kost->setItem(i,ii-1, new QTableWidgetItem(""));
-            }
+            ui->tableWidget_kost->setItem(i,ii, new QTableWidgetItem(KoSt.tabelle().wert(i,ii)));
         }
     }
    QDialog::showEvent(e);
@@ -64,15 +43,17 @@ void Dialog_Kostenstellen::resizeEvent(QResizeEvent *event)
 }
 void Dialog_Kostenstellen::zeile_anhaengen()
 {
+    /*
     ui->tableWidget_kost->setRowCount(ui->tableWidget_kost->rowCount()+1);
     for(int i=0;i<=ui->tableWidget_kost->columnCount();i++)
     {
         ui->tableWidget_kost->setItem(ui->tableWidget_kost->rowCount(),i, new QTableWidgetItem(""));
     }
+    */
 }
 void Dialog_Kostenstellen::kostenstellen_sortieren()
 {
-    KoSten.sortieren();
+    KoSt.sortieren();
 }
 void Dialog_Kostenstellen::on_pushButton_abbrechen_clicked()
 {
@@ -80,7 +61,7 @@ void Dialog_Kostenstellen::on_pushButton_abbrechen_clicked()
 }
 void Dialog_Kostenstellen::on_pushButton_ok_clicked()
 {
-    KoSten.speichern();
+    KoSt.speichern();
     QString msg;
     msg = "Die Änderungen werden nach dem nächsten Programmstart wirksam.";
     QMessageBox mb;
@@ -91,6 +72,7 @@ void Dialog_Kostenstellen::on_pushButton_ok_clicked()
 }
 void Dialog_Kostenstellen::on_tableWidget_kost_cellChanged(int row, int column)
 {
+    /*
     if(column == 0)//nr
     {//neue Zeile in Tabelle einfügen und mit items füllen:
         QString nr;
@@ -221,13 +203,16 @@ void Dialog_Kostenstellen::on_tableWidget_kost_cellChanged(int row, int column)
         }
     }
     tabellenupdate = false;
+    */
 }
 void Dialog_Kostenstellen::on_tableWidget_kost_itemSelectionChanged()
 {
+    /*
     if(ui->tableWidget_kost->currentItem())
     {
         daten_vor_aenderung = ui->tableWidget_kost->currentItem()->text();
     }
+    */
 }
 void Dialog_Kostenstellen::on_tableWidget_kost_customContextMenuRequested(const QPoint &pos)
 {

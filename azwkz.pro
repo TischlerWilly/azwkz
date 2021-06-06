@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     Dialoge/dialog_mitarbeiter.cpp \
+    Funktionen/umwandeln.cpp \
     Klassen/kostenstelle.cpp \
     Klassen/kostenstellen.cpp \
     Klassen/liste_qstring.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     Dialoge/dialog_mitarbeiter.h \
+    Funktionen/umwandeln.h \
     Klassen/kostenstelle.h \
     Klassen/kostenstellen.h \
     Klassen/liste_qstring.h \
