@@ -23,6 +23,7 @@ public:
 
     text_zeilenweise tabelle_tz();
     tabelle_qstring *tabelle();
+    liste_QString zeile_nr(QString nr);
 
 private:
     tabelle_qstring KoSt;

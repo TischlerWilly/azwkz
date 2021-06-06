@@ -17,21 +17,21 @@ bool tabelle_qstring::set_wert(int index_zeile, int indes_spalte, QString wert)
     if(index_zeile < anz_zeilen() && indes_spalte < anz_spalten())
     {
         Liqs[index_zeile].ersaetzen(indes_spalte, wert);
-        return true;
+        return false;//Es gab keinen Fehler
     }else
     {
-        return false;
+        return true;//Es gab einen Fehler
     }
 }
 bool tabelle_qstring::zeile_anhaengen(liste_QString zeile)
 {
     if(zeile.count() != anz_spalten())
     {        
-        return false;
+        return true;//Es gab einen Fehler
     }else
     {
         Liqs.push_back(zeile);
-        return true;
+        return false;//Es geb keinen Fehler
     }
 }
 
@@ -90,10 +90,10 @@ bool tabelle_qstring::zeile_entfernen(int index)
     if(index < Liqs.count())
     {
         Liqs.remove(index);
-        return true;
+        return false;//Es gab keinen Fehler
     }else
     {
-        return false;
+        return true;//Es gab einen Fehler
     }
 }
 void tabelle_qstring::sortieren_double(int index_sortierspalte)

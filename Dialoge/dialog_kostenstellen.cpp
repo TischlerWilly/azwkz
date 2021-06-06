@@ -75,7 +75,73 @@ void Dialog_Kostenstellen::on_tableWidget_kost_customContextMenuRequested(const 
 
 void Dialog_Kostenstellen::on_pushButton_neu_clicked()
 {
-    //Dialog aufrufen
-
+    Dialog_kostenstelle dlg;
+    dlg.setWindowTitle("Kostenstelle anlegen");
+    dlg.set_KoSt(&KoSt);
+    dlg.set_Modus_neu();
+    dlg.exec();
     kostenstellen_sortieren();
+}
+void Dialog_Kostenstellen::on_pushButton_edit_clicked()
+{
+    int row = ui->tableWidget_kost->currentRow();
+    if(row >= 0)
+    {
+        QString nr = KoSt.tabelle()->wert(row, INDEX_NUMMER);
+        Dialog_kostenstelle dlg;
+        dlg.setWindowTitle("Kostenstelle bearbeiten");
+        dlg.set_KoSt(&KoSt);
+        dlg.set_Modus_edit();
+        dlg.set_akt_kost(nr);
+        dlg.exec();
+        kostenstellen_sortieren();
+    }else
+    {
+        QString msg;
+        msg = "Bitte klicken Sie zuvor eine Kostenstelle in der Tabelle an.";
+        QMessageBox mb;
+        mb.setText(msg);
+        mb.setWindowTitle("Kostenstelle bearbeiten");
+        mb.exec();
+    }
+}
+void Dialog_Kostenstellen::on_pushButton_entfernen_clicked()
+{
+    int row = ui->tableWidget_kost->currentRow();
+    if(row >= 0)
+    {
+        //Sicherheitsbafrage:
+        QString msg;
+        msg = "Wollen Sie die Kostenstelle\n";
+        msg += KoSt.tabelle()->zeile(row).tz('\t').text();
+        msg += "\n wirklich löschen?";
+        QMessageBox mb;
+        mb.setWindowTitle("Mostenstelle löschen");
+        mb.setText(msg);
+        mb.setStandardButtons(QMessageBox::Yes);
+        mb.addButton(QMessageBox::No);
+        mb.setDefaultButton(QMessageBox::No);
+        int mb_returnwert = mb.exec();
+        if(mb_returnwert == QMessageBox::Yes)
+        {
+            QString nr = KoSt.tabelle()->wert(row, INDEX_NUMMER);
+            if(KoSt.del(nr))//Wenn es einen Fehler gab
+            {
+                QMessageBox mb;
+                mb.setText("Die Kostenstelle konnte nicht gelöscht werden.");
+                mb.exec();
+            }else
+            {
+                kostenstellen_sortieren();
+            }
+        }
+    }else
+    {
+        QString msg;
+        msg = "Bitte klicken Sie zuvor eine Kostenstelle in der Tabelle an.";
+        QMessageBox mb;
+        mb.setText(msg);
+        mb.setWindowTitle("Kostenstelle bearbeiten");
+        mb.exec();
+    }
 }

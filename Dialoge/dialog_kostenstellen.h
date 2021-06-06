@@ -3,7 +3,9 @@
 
 #include <QDialog>
 #include <QMenu>
+
 #include "Klassen/kostenstellen.h"
+#include "Dialoge/dialog_kostenstelle.h"
 
 namespace Ui {
 class Dialog_Kostenstellen;
@@ -26,8 +28,11 @@ private slots:
     void on_pushButton_abbrechen_clicked();
     void on_pushButton_ok_clicked();
     void on_tableWidget_kost_customContextMenuRequested(const QPoint &pos);
-
     void on_pushButton_neu_clicked();
+
+    void on_pushButton_edit_clicked();
+
+    void on_pushButton_entfernen_clicked();
 
 private:
     Ui::Dialog_Kostenstellen *ui;

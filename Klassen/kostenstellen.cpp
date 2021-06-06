@@ -24,20 +24,20 @@ bool kostenstellen::add(liste_QString k)
     if(!existiert)
     {
         KoSt.zeile_anhaengen(k);
-        return true;
+        return false;//Es gab keinen Fehler
     }else
     {
-        return  false;
+        return  true;//Es gab einen Fehler
     }
 }
 bool kostenstellen::del(liste_QString k)
 {
-    bool retbool = false;
+    bool retbool = true;//es gab einen Fehler
     for(int i=0;i<KoSt.anz_zeilen();i++)
     {
         if(k.wert(INDEX_NUMMER) == KoSt.wert(i, INDEX_NUMMER))
         {
-            retbool = true;
+            retbool = false;//Es gab keinen Fehler
             KoSt.zeile_entfernen(i);
             break;
         }
@@ -46,12 +46,12 @@ bool kostenstellen::del(liste_QString k)
 }
 bool kostenstellen::del(QString nr)
 {
-    bool retbool = false;
+    bool retbool = true;//es gab einen Fehler
     for(int i=0;i<KoSt.anz_zeilen();i++)
     {
         if(nr == KoSt.wert(i, INDEX_NUMMER))
         {
-            retbool = true;
+            retbool = false;//es gab keinen Fehler
             KoSt.zeile_entfernen(i);
             break;
         }
@@ -118,12 +118,12 @@ void kostenstellen::clear()
 }
 bool kostenstellen::set_bez(QString nr, QString bez)
 {
-    bool retbool = false;
+    bool retbool = true;//es gab einen Fehler
     for(int i=0;i<KoSt.anz_zeilen();i++)
     {
         if(nr == KoSt.wert(i, INDEX_NUMMER))
         {
-            retbool = true;
+            retbool = false;//es gab keinen Fehler
             KoSt.set_wert(i, INDEX_BEZEICHUNG, bez);
             break;
         }
@@ -148,5 +148,17 @@ tabelle_qstring *kostenstellen::tabelle()
 {
     return &KoSt;
 }
-
+liste_QString kostenstellen::zeile_nr(QString nr)
+{
+    liste_QString lqs;
+    for(int i=0;i<KoSt.anz_zeilen();i++)
+    {
+        if(nr == KoSt.wert(i, INDEX_NUMMER))
+        {
+            lqs = KoSt.zeile(i);
+            break;
+        }
+    }
+    return lqs;
+}
 
