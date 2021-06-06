@@ -55,6 +55,19 @@
     <string>Abbrechen</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton_neu">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>30</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>neu</string>
+   </property>
+  </widget>
   <action name="tabelle_sortieren">
    <property name="text">
     <string>tabelle_sortieren</string>

@@ -35,7 +35,6 @@ bool tabelle_qstring::zeile_anhaengen(liste_QString zeile)
     }
 }
 
-
 //----------------get_xy:
 int tabelle_qstring::anz_spalten()
 {
@@ -101,14 +100,14 @@ void tabelle_qstring::sortieren_double(int index_sortierspalte)
 {
     //Diese Funktion sorteiert die tabelle basierend auf den Werten in Spalte
     //"index_sortierspalte" um
-    //verglichen werden die in double umgewandelten Werte
+    //verglichen werden die in double umgewandelten Werte    
 
     if(Liqs.count()>1)
     {
         QVector<liste_QString> liqs_neu;
         //1. Zeile einfach verschieben:
         liqs_neu.push_back(Liqs.at(0));
-        Liqs.erase(0);
+        Liqs.remove(0);
         //2. Zeile davor oder dannach:
         double dalt = Liqs[0].wert(index_sortierspalte).toDouble();
         double dneu = liqs_neu[0].wert(index_sortierspalte).toDouble();
@@ -119,7 +118,7 @@ void tabelle_qstring::sortieren_double(int index_sortierspalte)
         {
             liqs_neu.push_front(Liqs.at(0));
         }
-        Liqs.erase(0);
+        Liqs.remove(0);
         //restliche werte einsortieren:
         while(Liqs.count()>=1)
         {
@@ -128,17 +127,17 @@ void tabelle_qstring::sortieren_double(int index_sortierspalte)
             if(dalt <= dneu)//Wenn alt <= erster Wert von neu
             {
                 liqs_neu.push_front(Liqs.at(0));
-                Liqs.erase(0);
+                Liqs.remove(0);
             }else
             {
                 dneu = liqs_neu[liqs_neu.count()-1].wert(index_sortierspalte).toDouble();
                 if(dalt >= dneu)//Wenn alt >= letzter Wert von neu
                 {
                     liqs_neu.push_back(Liqs.at(0));
-                    Liqs.erase(0);
+                    Liqs.remove(0);
                 }else//der Wert gehört irgendwo in die Mitte
                 {
-                    for(int i=0;i<liqs_neu.count()-2;i++)
+                    for(int i=0;i<liqs_neu.count()-1;i++)
                     {
                         double daktzei;//Wert der aktuellen Zeile
                         daktzei = liqs_neu[i].wert(index_sortierspalte).toDouble();
@@ -146,8 +145,8 @@ void tabelle_qstring::sortieren_double(int index_sortierspalte)
                         dfolzei = liqs_neu[i+1].wert(index_sortierspalte).toDouble();
                         if((dalt >= daktzei) && (dalt <=dfolzei))
                         {
-                            liqs_neu.insert(i, Liqs.at(0));
-                            Liqs.erase(0);
+                            liqs_neu.insert(i+1, Liqs.at(0));
+                            Liqs.remove(0);
                             break;
                         }
                     }

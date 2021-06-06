@@ -12,26 +12,13 @@ Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 #############################################################################
 in Arbeit:
 
-dlg KoSt
 
+void Dialog_Kostenstellen::on_pushButton_neu_clicked()
+    ->Dialog aufrufen zur Eingabe einer neuen Kostenstelle
+    ->Kostenstellen-Tabelle im Eingaben aus dem Dialog erweitern
+void Dialog_Kostenstellen::resizeEvent(QResizeEvent *event)
 void Dialog_Kostenstellen::on_pushButton_ok_clicked()
     ->signal einbauen an Mainwindow damit programm-neustart nicht nötig ist
-
-Klasse Kostenstelle entfernen
-    Klasse Kostenstellen umschreiben
-        void kostenstellen::initialisieren() ok
-        void kostenstellen::speichern() ok
-        void kostenstellen::sortieren() ok
-    Dialog Kostenstellen umstellen --> begonnen
-
-void kostenstellen::sortieren()
-    -> ggf eine allgemeine Funktion für tz daraus machen
-void Dialog_Kostenstellen::kostenstellen_sortieren()
-    -> noch fertig stellen
-
-
-void Dialog_Kostenstellen::resizeEvent(QResizeEvent *event)
-
 
 
 
