@@ -51,40 +51,48 @@ void Dialog_kostenstelle::on_pushButton_ok_clicked()
 {
     liste_QString lqs;
     lqs.anhaengen(int_to_qstring(ui->spinBox_nr->value()));
-    lqs.anhaengen(ui->lineEdit_bez->text());
-    if(Modus == MODUS_KST_NEU)
+    if(ui->lineEdit_bez->text().isEmpty())
     {
-        if(KoSt->add(lqs))//Wenn es einen Fehler gab
-        {
-            QMessageBox mb;
-            mb.setText("Diese Kostenstelle gibt es bereits.\nBitten wählen Sie eine andere Nummer.");
-            mb.exec();
-        }else
-        {
-            this->close();
-        }
-    }else if(Modus == MODUS_KST_EDIT)
-    {
-        QString nr = int_to_qstring(ui->spinBox_nr->value());
-        QString bez = ui->lineEdit_bez->text();
-        if(KoSt->set_bez(nr, bez))//wenn es einen Fehler gab
-        {
-            QMessageBox mb;
-            mb.setText("Die Bezeichnung der Kostenstelle konnte nicht geändert werden.");
-            mb.exec();
-        }else
-        {
-            this->close();
-        }
+        QMessageBox mb;
+        mb.setText("Bitte geben Sie noch eine Bezeichung ein.");
+        mb.exec();
     }else
     {
-        QString msg;
-        msg = "Der Dialog wurde im Modus 0 aufgerufen.\n";
-        msg += "Bitte wenden Sie sich an Ihren Administrator.";
-        QMessageBox mb;
-        mb.setText(msg);
-        mb.setWindowTitle("Dialogaufruf fehlerhaft");
-        mb.exec();
+        lqs.anhaengen(ui->lineEdit_bez->text());
+        if(Modus == MODUS_KST_NEU)
+        {
+            if(KoSt->add(lqs))//Wenn es einen Fehler gab
+            {
+                QMessageBox mb;
+                mb.setText("Diese Kostenstelle gibt es bereits.\nBitten wählen Sie eine andere Nummer.");
+                mb.exec();
+            }else
+            {
+                this->close();
+            }
+        }else if(Modus == MODUS_KST_EDIT)
+        {
+            QString nr = int_to_qstring(ui->spinBox_nr->value());
+            QString bez = ui->lineEdit_bez->text();
+            if(KoSt->set_bez(nr, bez))//wenn es einen Fehler gab
+            {
+                QMessageBox mb;
+                mb.setText("Die Bezeichnung der Kostenstelle konnte nicht geändert werden.");
+                mb.exec();
+            }else
+            {
+                this->close();
+            }
+        }else
+        {
+            QString msg;
+            msg = "Der Dialog wurde im Modus 0 aufgerufen.\n";
+            msg += "Bitte wenden Sie sich an Ihren Administrator.";
+            QMessageBox mb;
+            mb.setText(msg);
+            mb.setWindowTitle("Dialogaufruf fehlerhaft");
+            mb.exec();
+        }
     }
 }
 

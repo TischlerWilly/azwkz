@@ -9,6 +9,7 @@ Dialog_Kostenstellen::Dialog_Kostenstellen(QWidget *parent) :
     ui->tableWidget_kost->setContextMenuPolicy(Qt::CustomContextMenu);
     this->setWindowTitle("Kostenstellen verwalten");
     this->setModal(true);
+    this->setFixedWidth(500);
 }
 Dialog_Kostenstellen::~Dialog_Kostenstellen()
 {
@@ -27,7 +28,7 @@ void Dialog_Kostenstellen::update_tablewidget()
     ui->tableWidget_kost->setRowCount(KoSt.tabelle()->anz_zeilen());//Zeilenanzahl
     ui->tableWidget_kost->setHorizontalHeaderLabels(KoSt.tabelle()->tabkopf().qstringlist());
     ui->tableWidget_kost->setColumnWidth(0,60);//nr
-    ui->tableWidget_kost->setColumnWidth(1,200);//bez
+    ui->tableWidget_kost->setColumnWidth(1,300);//bez
 
     for(int i=0;i<KoSt.tabelle()->anz_zeilen();i++)
     {
@@ -38,8 +39,17 @@ void Dialog_Kostenstellen::update_tablewidget()
     }
 }
 void Dialog_Kostenstellen::resizeEvent(QResizeEvent *event)
-{
-    //tu was
+{   
+    ui->tableWidget_kost->move(2,2);
+    ui->tableWidget_kost->setFixedWidth(this->width()-100);
+    ui->tableWidget_kost->setFixedHeight(this->height()-30);
+
+    ui->pushButton_ok->move(2+ui->tableWidget_kost->width()/2-2-ui->pushButton_ok->width(), this->height()-25);
+    ui->pushButton_abbrechen->move(ui->pushButton_ok->x()+ui->pushButton_ok->width()+5, ui->pushButton_ok->y());
+
+    ui->pushButton_neu->move(this->width()-90, 2);
+    ui->pushButton_edit->move(this->width()-90, 2+25+2);
+    ui->pushButton_entfernen->move(this->width()-90, 2+(25+2)*2);
 
     QDialog::resizeEvent(event);
 }
@@ -54,14 +64,9 @@ void Dialog_Kostenstellen::on_pushButton_abbrechen_clicked()
 }
 void Dialog_Kostenstellen::on_pushButton_ok_clicked()
 {
-    KoSt.speichern();
-    QString msg;
-    msg = "Die Änderungen werden nach dem nächsten Programmstart wirksam.";
-    QMessageBox mb;
-    mb.setText(msg);
-    mb.setWindowTitle("Kostenstellen wurden gespeichert");
-    mb.exec();
+    KoSt.speichern();   
     this->hide();
+    emit(signal_kost(KoSt));
 }
 void Dialog_Kostenstellen::on_tableWidget_kost_customContextMenuRequested(const QPoint &pos)
 {
@@ -72,7 +77,6 @@ void Dialog_Kostenstellen::on_tableWidget_kost_customContextMenuRequested(const 
     m.addAction("Kostenstellen sortieren", this, SLOT(kostenstellen_sortieren()), 0) ;
     m.exec(this->mapFrom(this, mpos));
 }
-
 void Dialog_Kostenstellen::on_pushButton_neu_clicked()
 {
     Dialog_kostenstelle dlg;

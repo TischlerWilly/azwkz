@@ -29,10 +29,11 @@ private slots:
     void on_pushButton_ok_clicked();
     void on_tableWidget_kost_customContextMenuRequested(const QPoint &pos);
     void on_pushButton_neu_clicked();
-
     void on_pushButton_edit_clicked();
-
     void on_pushButton_entfernen_clicked();
+
+signals:
+    void signal_kost(kostenstellen);
 
 private:
     Ui::Dialog_Kostenstellen *ui;

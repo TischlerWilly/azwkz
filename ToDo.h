@@ -1,7 +1,7 @@
 #ifndef TODO_H
 #define TODO_H
 
-#define PROGRAMMVERSION     "1.2021.06.06"
+#define PROGRAMMVERSION     "1.2021.06.07"
 /*#############################################################################
 Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 - Variablen beginnen mit einem großen Buchstaben
@@ -12,10 +12,6 @@ Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 #############################################################################
 in Arbeit:
 
-
-void Dialog_Kostenstellen::resizeEvent(QResizeEvent *event)
-void Dialog_Kostenstellen::on_pushButton_ok_clicked()
-    ->signal einbauen an Mainwindow damit programm-neustart nicht nötig ist
 
 
 

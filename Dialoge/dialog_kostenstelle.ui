@@ -16,7 +16,7 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -55,7 +55,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -82,6 +82,12 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>spinBox_nr</tabstop>
+  <tabstop>lineEdit_bez</tabstop>
+  <tabstop>pushButton_ok</tabstop>
+  <tabstop>pushButton_abbrechen</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
