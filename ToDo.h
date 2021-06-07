@@ -1,7 +1,7 @@
 #ifndef TODO_H
 #define TODO_H
 
-#define PROGRAMMVERSION     "1.2021.06.03"
+#define PROGRAMMVERSION     "1.2021.06.07"
 /*#############################################################################
 Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 - Variablen beginnen mit einem großen Buchstaben
@@ -11,21 +11,6 @@ Diese Klassen-Design-Regeln habe ich mir vorgenommen:
    Gut:      x()
 #############################################################################
 in Arbeit:
-
-dlg KoSt
-
-void Dialog_Kostenstellen::on_pushButton_ok_clicked()
-    ->signal einbauen an Mainwindow damit programm-neustart nicht nötig ist
-
-Klasse "tabelle_qstring" schreiben
-
-void kostenstellen::sortieren()
-    -> ggf eine allgemeine Funktion für tz daraus machen
-void Dialog_Kostenstellen::kostenstellen_sortieren()
-    -> noch fertig stellen
-
-
-void Dialog_Kostenstellen::resizeEvent(QResizeEvent *event)
 
 
 

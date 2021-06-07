@@ -20,10 +20,11 @@ public:
 
 private slots:
     void on_actionKostenstellen_triggered();
+    void slot_kost(kostenstellen k);
 
 private:
     Ui::MainWindow *ui;
-    kostenstellen KoSten;
+    kostenstellen KoSt;
     Dialog_Kostenstellen Dlg_KoSt;
     prgpfade prgpf;
 };

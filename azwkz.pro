@@ -9,28 +9,33 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Dialoge/dialog_kostenstelle.cpp \
     Dialoge/dialog_mitarbeiter.cpp \
-    Klassen/kostenstelle.cpp \
+    Funktionen/umwandeln.cpp \
     Klassen/kostenstellen.cpp \
     Klassen/liste_qstring.cpp \
     Klassen/prgpfade.cpp \
+    Klassen/tabelle_qstring.cpp \
     Klassen/text_zeilenweise.cpp \
     Dialoge/dialog_kostenstellen.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    Dialoge/dialog_kostenstelle.h \
     Dialoge/dialog_mitarbeiter.h \
-    Klassen/kostenstelle.h \
+    Funktionen/umwandeln.h \
     Klassen/kostenstellen.h \
     Klassen/liste_qstring.h \
     Klassen/prgpfade.h \
+    Klassen/tabelle_qstring.h \
     Klassen/text_zeilenweise.h \
     ToDo.h \
     Dialoge/dialog_kostenstellen.h \
     mainwindow.h
 
 FORMS += \
+    Dialoge/dialog_kostenstelle.ui \
     Dialoge/dialog_kostenstellen.ui \
     Dialoge/dialog_mitarbeiter.ui \
     mainwindow.ui

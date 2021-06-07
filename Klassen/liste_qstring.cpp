@@ -87,6 +87,15 @@ text_zeilenweise liste_QString::tz(char trennzeichen)
     tz.set_text(ret);
     return tz;
 }
+QStringList liste_QString::qstringlist()
+{
+    QStringList ret;
+    for(int i=0;i<Vs.count();i++)
+    {
+        ret.append(Vs.at(i));
+    }
+    return ret;
+}
 QString liste_QString::wert(int index)
 {
     return Vs.at(index);

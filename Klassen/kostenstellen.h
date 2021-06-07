@@ -4,16 +4,16 @@
 #include <QVector>
 #include <QMessageBox>
 
-#include "kostenstelle.h"
 #include "text_zeilenweise.h"
 #include "Klassen/prgpfade.h"
+#include "Klassen/tabelle_qstring.h"
 
 class kostenstellen
 {
 public:
     kostenstellen();
-    bool add(kostenstelle k);
-    bool del(kostenstelle k);
+    bool add(liste_QString k);
+    bool del(liste_QString k);
     bool del(QString nr);
     void initialisieren();
     void speichern();
@@ -21,14 +21,17 @@ public:
     bool set_bez(QString nr, QString bez);
     void sortieren();
 
-    text_zeilenweise tabelle();
-    kostenstelle kost(QString nr);
+    text_zeilenweise tabelle_tz();
+    tabelle_qstring *tabelle();
+    liste_QString zeile_nr(QString nr);
 
 private:
-    QVector<kostenstelle> KoSt; //Kostenstellen
+    tabelle_qstring KoSt;
     prgpfade prgpf;
 
-    bool exist(kostenstelle k);
 };
+
+#define INDEX_NUMMER        0
+#define INDEX_BEZEICHUNG    1
 
 #endif // KOSTENSTELLEN_H
