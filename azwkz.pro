@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     Dialoge/dialog_kostenstelle.cpp \
+    Dialoge/dialog_mitarb_einzeln.cpp \
     Dialoge/dialog_mitarbeiter.cpp \
     Funktionen/umwandeln.cpp \
     Klassen/kostenstellen.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     Dialoge/dialog_kostenstelle.h \
+    Dialoge/dialog_mitarb_einzeln.h \
     Dialoge/dialog_mitarbeiter.h \
     Funktionen/umwandeln.h \
     Klassen/kostenstellen.h \
@@ -39,6 +41,7 @@ HEADERS += \
 FORMS += \
     Dialoge/dialog_kostenstelle.ui \
     Dialoge/dialog_kostenstellen.ui \
+    Dialoge/dialog_mitarb_einzeln.ui \
     Dialoge/dialog_mitarbeiter.ui \
     mainwindow.ui
 

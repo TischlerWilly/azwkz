@@ -19,7 +19,7 @@ public:
     void clear();
     bool set_vorname(QString nr, QString nam);
     bool set_nachname(QString nr, QString nam);
-    bool set_idscanner(QString nr, QString id);
+    int set_idscanner(QString nr, QString id);
     void sortieren();
 
     text_zeilenweise tabelle_tz();

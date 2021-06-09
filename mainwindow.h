@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 
-#include "Dialoge/dialog_kostenstellen.h"
+#include "ToDo.h"
 #include "Klassen/prgpfade.h"
+#include "Dialoge/dialog_kostenstellen.h"
+#include "Dialoge/dialog_mitarbeiter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,13 +21,17 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionKostenstellen_triggered();
     void slot_kost(kostenstellen k);
+    void slot_mitarb(mitarbeiter m);
+    void on_actionKostenstellen_triggered();
+    void on_actionMitarbeiter_triggered();
 
 private:
     Ui::MainWindow *ui;
-    kostenstellen KoSt;
-    Dialog_Kostenstellen Dlg_KoSt;
     prgpfade prgpf;
+    kostenstellen KoSt;
+    mitarbeiter  Mitarb;
+    Dialog_Kostenstellen Dlg_KoSt;
+    Dialog_Mitarbeiter Dlg_Mitarb;
 };
 #endif // MAINWINDOW_H

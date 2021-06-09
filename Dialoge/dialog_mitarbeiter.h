@@ -5,6 +5,7 @@
 #include <QMenu>
 
 #include "Klassen/mitarbeiter.h"
+#include "Dialoge/dialog_mitarb_einzeln.h"
 
 
 namespace Ui {

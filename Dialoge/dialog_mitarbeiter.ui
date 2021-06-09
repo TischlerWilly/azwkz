@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>502</width>
+    <width>647</width>
     <height>556</height>
    </rect>
   </property>
@@ -92,6 +92,14 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tableWidget_mitarb</tabstop>
+  <tabstop>pushButton_ok</tabstop>
+  <tabstop>pushButton_abbrechen</tabstop>
+  <tabstop>pushButton_neu</tabstop>
+  <tabstop>pushButton_edit</tabstop>
+  <tabstop>pushButton_entfernen</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

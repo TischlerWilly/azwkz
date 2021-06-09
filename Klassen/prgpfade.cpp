@@ -5,7 +5,7 @@ prgpfade::prgpfade()
     Inifile     = "einstellungen.ini";
     KoStFile    = "kostenstellen.ini";
     UserFile    = "nutzer.ini";
-    MitarbFile  = "mitab.ini";
+    MitarbFile  = "mitab.dat";
 }
 
 void prgpfade::ordner_erstellen()

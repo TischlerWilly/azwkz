@@ -120,7 +120,7 @@ void Dialog_Kostenstellen::on_pushButton_entfernen_clicked()
         msg += KoSt.tabelle()->zeile(row).tz('\t').text();
         msg += "\n wirklich löschen?";
         QMessageBox mb;
-        mb.setWindowTitle("Mostenstelle löschen");
+        mb.setWindowTitle("Kostenstelle löschen");
         mb.setText(msg);
         mb.setStandardButtons(QMessageBox::Yes);
         mb.addButton(QMessageBox::No);

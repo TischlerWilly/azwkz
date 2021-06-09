@@ -18,7 +18,6 @@ void Dialog_kostenstelle::set_KoSt(kostenstellen *k)
 {
     KoSt = k;
 }
-
 void Dialog_kostenstelle::set_Modus_neu()
 {
     Modus = MODUS_KST_NEU;
