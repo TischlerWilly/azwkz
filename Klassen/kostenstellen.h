@@ -1,10 +1,8 @@
 #ifndef KOSTENSTELLEN_H
 #define KOSTENSTELLEN_H
 
-#include <QVector>
 #include <QMessageBox>
 
-#include "text_zeilenweise.h"
 #include "Klassen/prgpfade.h"
 #include "Klassen/tabelle_qstring.h"
 
@@ -31,7 +29,7 @@ private:
 
 };
 
-#define INDEX_NUMMER        0
-#define INDEX_BEZEICHUNG    1
+#define INDEX_KOST_NUMMER        0
+#define INDEX_KOST_BEZEICHUNG    1
 
 #endif // KOSTENSTELLEN_H

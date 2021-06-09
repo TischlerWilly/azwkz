@@ -15,5 +15,17 @@ in Arbeit:
 
 
 
+Mitarbeiter-Verwaltung:
+    personalnummer
+    nachnahme
+    vornahme
+    id-datensammler
+
+Benutzerverwaltung:
+    name
+    pwd
+    mitarbeiter
+    berechtigungen
+
 */
 #endif // TODO_H

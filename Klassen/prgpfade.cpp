@@ -5,6 +5,7 @@ prgpfade::prgpfade()
     Inifile     = "einstellungen.ini";
     KoStFile    = "kostenstellen.ini";
     UserFile    = "nutzer.ini";
+    MitarbFile  = "mitab.ini";
 }
 
 void prgpfade::ordner_erstellen()
@@ -32,6 +33,10 @@ QString prgpfade::name_KoStFile()
 QString prgpfade::name_UserFile()
 {
     return UserFile;
+}
+QString prgpfade::name_MitarbFile()
+{
+    return MitarbFile;
 }
 
 QString prgpfade::path_prg()
@@ -68,6 +73,14 @@ QString prgpfade::path_UserFile()
     tmp = path_netw();
     tmp += QDir::separator();
     tmp += UserFile;
+    return tmp;
+}
+QString prgpfade::path_MitarbFile()
+{
+    QString tmp;
+    tmp = path_netw();
+    tmp += QDir::separator();
+    tmp += MitarbFile;
     return tmp;
 }
 

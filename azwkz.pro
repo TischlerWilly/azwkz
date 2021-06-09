@@ -14,6 +14,7 @@ SOURCES += \
     Funktionen/umwandeln.cpp \
     Klassen/kostenstellen.cpp \
     Klassen/liste_qstring.cpp \
+    Klassen/mitarbeiter.cpp \
     Klassen/prgpfade.cpp \
     Klassen/tabelle_qstring.cpp \
     Klassen/text_zeilenweise.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     Funktionen/umwandeln.h \
     Klassen/kostenstellen.h \
     Klassen/liste_qstring.h \
+    Klassen/mitarbeiter.h \
     Klassen/prgpfade.h \
     Klassen/tabelle_qstring.h \
     Klassen/text_zeilenweise.h \

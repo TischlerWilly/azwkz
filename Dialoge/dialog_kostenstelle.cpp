@@ -43,8 +43,8 @@ void Dialog_kostenstelle::set_akt_kost(QString nr)
     }else
     {
         liste_QString lqs = KoSt->zeile_nr(nr);
-        ui->spinBox_nr->setValue(lqs.wert(INDEX_NUMMER).toInt());
-        ui->lineEdit_bez->setText(lqs.wert(INDEX_BEZEICHUNG));
+        ui->spinBox_nr->setValue(lqs.wert(INDEX_KOST_NUMMER).toInt());
+        ui->lineEdit_bez->setText(lqs.wert(INDEX_KOST_BEZEICHUNG));
     }
 }
 void Dialog_kostenstelle::on_pushButton_ok_clicked()

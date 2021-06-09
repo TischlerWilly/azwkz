@@ -15,7 +15,7 @@ bool kostenstellen::add(liste_QString k)
     bool existiert = false;
     for(int i=0;i<KoSt.anz_zeilen();i++)
     {
-        if(k.wert(INDEX_NUMMER) == KoSt.wert(i, INDEX_NUMMER))
+        if(k.wert(INDEX_KOST_NUMMER) == KoSt.wert(i, INDEX_KOST_NUMMER))
         {
             existiert = true;
             break;
@@ -35,7 +35,7 @@ bool kostenstellen::del(liste_QString k)
     bool retbool = true;//es gab einen Fehler
     for(int i=0;i<KoSt.anz_zeilen();i++)
     {
-        if(k.wert(INDEX_NUMMER) == KoSt.wert(i, INDEX_NUMMER))
+        if(k.wert(INDEX_KOST_NUMMER) == KoSt.wert(i, INDEX_KOST_NUMMER))
         {
             retbool = false;//Es gab keinen Fehler
             KoSt.zeile_entfernen(i);
@@ -49,7 +49,7 @@ bool kostenstellen::del(QString nr)
     bool retbool = true;//es gab einen Fehler
     for(int i=0;i<KoSt.anz_zeilen();i++)
     {
-        if(nr == KoSt.wert(i, INDEX_NUMMER))
+        if(nr == KoSt.wert(i, INDEX_KOST_NUMMER))
         {
             retbool = false;//es gab keinen Fehler
             KoSt.zeile_entfernen(i);
@@ -121,10 +121,10 @@ bool kostenstellen::set_bez(QString nr, QString bez)
     bool retbool = true;//es gab einen Fehler
     for(int i=0;i<KoSt.anz_zeilen();i++)
     {
-        if(nr == KoSt.wert(i, INDEX_NUMMER))
+        if(nr == KoSt.wert(i, INDEX_KOST_NUMMER))
         {
             retbool = false;//es gab keinen Fehler
-            KoSt.set_wert(i, INDEX_BEZEICHUNG, bez);
+            KoSt.set_wert(i, INDEX_KOST_BEZEICHUNG, bez);
             break;
         }
     }
@@ -132,7 +132,7 @@ bool kostenstellen::set_bez(QString nr, QString bez)
 }
 void kostenstellen::sortieren()
 {
-    KoSt.sortieren_double(INDEX_NUMMER);
+    KoSt.sortieren_double(INDEX_KOST_NUMMER);
 }
 //-------------get:
 text_zeilenweise kostenstellen::tabelle_tz()
@@ -153,7 +153,7 @@ liste_QString kostenstellen::zeile_nr(QString nr)
     liste_QString lqs;
     for(int i=0;i<KoSt.anz_zeilen();i++)
     {
-        if(nr == KoSt.wert(i, INDEX_NUMMER))
+        if(nr == KoSt.wert(i, INDEX_KOST_NUMMER))
         {
             lqs = KoSt.zeile(i);
             break;

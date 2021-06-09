@@ -13,12 +13,14 @@ public:
     QString name_inifile();
     QString name_KoStFile();
     QString name_UserFile();
+    QString name_MitarbFile();
 
     QString path_prg();
     QString path_netw();
     QString path_inifile();
     QString path_KoStFile();
     QString path_UserFile();
+    QString path_MitarbFile();
 
 
 private:
@@ -26,6 +28,7 @@ private:
     QString Inifile;
     QString KoStFile;
     QString UserFile;
+    QString MitarbFile;
 
 };
 

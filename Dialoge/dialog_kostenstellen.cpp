@@ -91,7 +91,7 @@ void Dialog_Kostenstellen::on_pushButton_edit_clicked()
     int row = ui->tableWidget_kost->currentRow();
     if(row >= 0)
     {
-        QString nr = KoSt.tabelle()->wert(row, INDEX_NUMMER);
+        QString nr = KoSt.tabelle()->wert(row, INDEX_KOST_NUMMER);
         Dialog_kostenstelle dlg;
         dlg.setWindowTitle("Kostenstelle bearbeiten");
         dlg.set_KoSt(&KoSt);
@@ -128,7 +128,7 @@ void Dialog_Kostenstellen::on_pushButton_entfernen_clicked()
         int mb_returnwert = mb.exec();
         if(mb_returnwert == QMessageBox::Yes)
         {
-            QString nr = KoSt.tabelle()->wert(row, INDEX_NUMMER);
+            QString nr = KoSt.tabelle()->wert(row, INDEX_KOST_NUMMER);
             if(KoSt.del(nr))//Wenn es einen Fehler gab
             {
                 QMessageBox mb;
