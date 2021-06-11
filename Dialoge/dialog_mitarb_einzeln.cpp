@@ -54,7 +54,12 @@ void Dialog_mitarb_einzeln::on_pushButton_ok_clicked()
     QString nana = ui->lineEdit_nana->text();
     QString idscan = ui->lineEdit_idscan->text();
 
-    if(vona.isEmpty())
+    if(nr.isEmpty())
+    {
+        QMessageBox mb;
+        mb.setText("Bitte geben Sie noch eine Personalnummer ein.");
+        mb.exec();
+    }else if(vona.isEmpty())
     {
         QMessageBox mb;
         mb.setText("Bitte geben Sie noch einen Vornamen ein.");
@@ -104,10 +109,20 @@ void Dialog_mitarb_einzeln::on_pushButton_ok_clicked()
                 mb.exec();
                 ok = false;
             }
-            if(Mitarb->set_idscanner(nr, idscan))//wenn es einen Fehler gab
+            int tmp = Mitarb->set_idscanner(nr, idscan);
+            if(tmp)//wenn es einen Fehler gab
             {
+                QString msg;
+                msg = "Die Scanner-ID konnte nicht geändert werden.\n";
+                if(tmp == 1)
+                {
+                    msg += "Mitarbeiter mir Personalnummer nr gibt es nicht";
+                }else if(tmp == 2)
+                {
+                    msg += "Scanner-ID ist bereits vergeben";
+                }
                 QMessageBox mb;
-                mb.setText("Die Scanner-ID konnte nicht geändert werden.");
+                mb.setText(msg);
                 mb.exec();
                 ok = false;
             }

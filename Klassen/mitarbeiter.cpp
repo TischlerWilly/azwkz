@@ -147,43 +147,35 @@ bool mitarbeiter::set_nachname(QString nr, QString nam)
 }
 int mitarbeiter::set_idscanner(QString nr, QString id)
 {
-    bool ret = 0;//es gab keinen Fehler
+    //Returnwerte:
+    //0:es gab keinen Fehler
     //1: Mitarbeiter mir Personalnummer nr gibt es nicht
     //2: Scanner-ID ist bereits vergeben
     bool mitarb_vorhanden = false;
     for(int i=0;i<Mitarb.anz_zeilen();i++)//Prüfen ob ein Mitarbeiter mit dieser Personalnummer existiert
-    {        
+    {
         if(nr == Mitarb.wert(i, INDEX_MITARB_NUMMER))
         {
             mitarb_vorhanden = true;
-            bool idscan_vergeben = false;
             for(int ii=0;ii<Mitarb.anz_zeilen();ii++)//Prüfen ob die Scanner-id bereits vergeben ist
             {
-                if(ii==i)
-                {
-                    continue;
-                }else
-                {
-                    if(id == Mitarb.wert(i, INDEX_MITARB_IDSCANNER))
+                if(ii != i)
+                {                    
+                    if(!id.isEmpty() && id == Mitarb.wert(ii, INDEX_MITARB_IDSCANNER))
                     {
-                        idscan_vergeben = true;
-                        ret = 2;//Scanner-ID ist bereits vergeben
-                        break;
+                        return 2;//Scanner-ID ist bereits vergeben
                     }
                 }
             }
-            if(idscan_vergeben == false)
-            {
-                Mitarb.set_wert(i, INDEX_MITARB_IDSCANNER, id);
-            }
-            break;
+            Mitarb.set_wert(i, INDEX_MITARB_IDSCANNER, id);
+            return 0;//es gab keinen Fehler
         }       
     }    
     if(mitarb_vorhanden == false)
     {
-        ret = 1;//Mitarbeiter mir Personalnummer nr gibt es nicht
+        return 1;//Mitarbeiter mir Personalnummer nr gibt es nicht
     }
-    return ret;
+    return 0;
 }
 void mitarbeiter::sortieren()
 {

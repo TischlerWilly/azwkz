@@ -13,6 +13,7 @@ SOURCES += \
     Dialoge/dialog_mitarb_einzeln.cpp \
     Dialoge/dialog_mitarbeiter.cpp \
     Funktionen/umwandeln.cpp \
+    Klassen/arbeitszeiten.cpp \
     Klassen/kostenstellen.cpp \
     Klassen/liste_qstring.cpp \
     Klassen/mitarbeiter.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     Dialoge/dialog_mitarb_einzeln.h \
     Dialoge/dialog_mitarbeiter.h \
     Funktionen/umwandeln.h \
+    Klassen/arbeitszeiten.h \
     Klassen/kostenstellen.h \
     Klassen/liste_qstring.h \
     Klassen/mitarbeiter.h \
