@@ -157,5 +157,155 @@ void tabelle_qstring::sortieren_double(int index_sortierspalte)
         Liqs = liqs_neu;
     }
 }
+void tabelle_qstring::sortieren_datum(int index_sortierspalte)
+{
+    //Diese Funktion sorteiert die tabelle basierend auf den Werten in Spalte
+    //"index_sortierspalte" um
+    //verglichen werden die in double umgewandelten Werte
+
+    if(Liqs.count()>1)
+    {
+        QVector<liste_QString> liqs_neu;
+        //1. Zeile einfach verschieben:
+        liqs_neu.push_back(Liqs.at(0));
+        Liqs.remove(0);
+        //2. Zeile davor oder dannach:
+        QDate dalt, dneu;
+        dalt.fromString(Liqs[0].wert(index_sortierspalte));
+        dneu.fromString(liqs_neu[0].wert(index_sortierspalte));
+        //double dalt = Liqs[0].wert(index_sortierspalte).toDouble();
+        //double dneu = liqs_neu[0].wert(index_sortierspalte).toDouble();
+        if(dalt >= dneu)
+        {
+            liqs_neu.push_back(Liqs.at(0));
+        }else
+        {
+            liqs_neu.push_front(Liqs.at(0));
+        }
+        Liqs.remove(0);
+        //restliche werte einsortieren:
+        while(Liqs.count()>=1)
+        {
+            dalt.fromString(Liqs[0].wert(index_sortierspalte));
+            dneu.fromString(liqs_neu[0].wert(index_sortierspalte));
+            //dalt = Liqs[0].wert(index_sortierspalte).toDouble();
+            //dneu = liqs_neu[0].wert(index_sortierspalte).toDouble();
+            if(dalt <= dneu)//Wenn alt <= erster Wert von neu
+            {
+                liqs_neu.push_front(Liqs.at(0));
+                Liqs.remove(0);
+            }else
+            {
+                dneu.fromString(liqs_neu[liqs_neu.count()-1].wert(index_sortierspalte));
+                //dneu = liqs_neu[liqs_neu.count()-1].wert(index_sortierspalte).toDouble();
+                if(dalt >= dneu)//Wenn alt >= letzter Wert von neu
+                {
+                    liqs_neu.push_back(Liqs.at(0));
+                    Liqs.remove(0);
+                }else//der Wert gehört irgendwo in die Mitte
+                {
+                    for(int i=0;i<liqs_neu.count()-1;i++)
+                    {
+                        QDate daktzei;//Wert der aktuellen Zeile
+                        daktzei.fromString(liqs_neu[i].wert(index_sortierspalte));
+                        QDate dfolzei;//Wert der nächsten Zeile
+                        dfolzei.fromString(liqs_neu[i+1].wert(index_sortierspalte));
+                        //double daktzei;//Wert der aktuellen Zeile
+                        //daktzei = liqs_neu[i].wert(index_sortierspalte).toDouble();
+                        //double dfolzei;//Wert der nächsten Zeile
+                        //dfolzei = liqs_neu[i+1].wert(index_sortierspalte).toDouble();
+                        if((dalt >= daktzei) && (dalt <=dfolzei))
+                        {
+                            liqs_neu.insert(i+1, Liqs.at(0));
+                            Liqs.remove(0);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        //Werte zurückspeichern:
+        Liqs = liqs_neu;
+    }
+}
+void tabelle_qstring::sortieren_zeit(int index_sortierspalte)
+{
+    //Diese Funktion sorteiert die tabelle basierend auf den Werten in Spalte
+    //"index_sortierspalte" um
+    //verglichen werden die in double umgewandelten Werte
+
+    if(Liqs.count()>1)
+    {
+        QVector<liste_QString> liqs_neu;
+        //1. Zeile einfach verschieben:
+        liqs_neu.push_back(Liqs.at(0));
+        Liqs.remove(0);
+        //2. Zeile davor oder dannach:
+        QTime dalt, dneu;
+        dalt.fromString(Liqs[0].wert(index_sortierspalte), "hh:mm");
+        dneu.fromString(liqs_neu[0].wert(index_sortierspalte), "hh:mm");
+
+
+        if(!dalt.isValid())
+        {
+            QMessageBox mb;
+            mb.setText(Liqs[0].wert(index_sortierspalte));
+            //mb.exec();
+        }
+
+
+        if(dalt >= dneu)
+        {
+            liqs_neu.push_back(Liqs.at(0));
+        }else
+        {
+            liqs_neu.push_front(Liqs.at(0));
+        }
+        Liqs.remove(0);
+        //restliche werte einsortieren:
+        while(Liqs.count()>=1)
+        {
+            dalt.fromString(Liqs[0].wert(index_sortierspalte), "hh:mm");
+            dneu.fromString(liqs_neu[0].wert(index_sortierspalte), "hh:mm");
+            //dalt = Liqs[0].wert(index_sortierspalte).toDouble();
+            //dneu = liqs_neu[0].wert(index_sortierspalte).toDouble();
+            if(dalt <= dneu)//Wenn alt <= erster Wert von neu
+            {
+                liqs_neu.push_front(Liqs.at(0));
+                Liqs.remove(0);
+            }else
+            {
+                dneu.fromString(liqs_neu[liqs_neu.count()-1].wert(index_sortierspalte), "hh:mm");
+                //dneu = liqs_neu[liqs_neu.count()-1].wert(index_sortierspalte).toDouble();
+                if(dalt >= dneu)//Wenn alt >= letzter Wert von neu
+                {
+                    liqs_neu.push_back(Liqs.at(0));
+                    Liqs.remove(0);
+                }else//der Wert gehört irgendwo in die Mitte
+                {
+                    for(int i=0;i<liqs_neu.count()-1;i++)
+                    {
+                        QTime daktzei;//Wert der aktuellen Zeile
+                        daktzei.fromString(liqs_neu[i].wert(index_sortierspalte), "hh:mm");
+                        QTime dfolzei;//Wert der nächsten Zeile
+                        dfolzei.fromString(liqs_neu[i+1].wert(index_sortierspalte), "hh:mm");
+                        //double daktzei;//Wert der aktuellen Zeile
+                        //daktzei = liqs_neu[i].wert(index_sortierspalte).toDouble();
+                        //double dfolzei;//Wert der nächsten Zeile
+                        //dfolzei = liqs_neu[i+1].wert(index_sortierspalte).toDouble();
+                        if((dalt >= daktzei) && (dalt <=dfolzei))
+                        {
+                            liqs_neu.insert(i+1, Liqs.at(0));
+                            Liqs.remove(0);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        //Werte zurückspeichern:
+        Liqs = liqs_neu;
+    }
+}
 
 

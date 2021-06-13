@@ -25,6 +25,7 @@ public:
     text_zeilenweise tabelle_tz();
     tabelle_qstring *tabelle();
     liste_QString zeile_nr(QString nr);
+    liste_QString zeile_idscan(QString id);
 
 
 private:

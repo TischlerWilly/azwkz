@@ -83,6 +83,12 @@ QString prgpfade::path_MitarbFile()
     tmp += MitarbFile;
     return tmp;
 }
-
+QDir prgpfade::dir_import_az()
+{
+    QString tmp;
+    tmp = "Z:\\Zeiten Datensammler\\Kopie um Tag ergänzt\\Testordner";
+    QDir d(tmp);
+    return d;
+}
 
 

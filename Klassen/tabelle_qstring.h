@@ -2,6 +2,8 @@
 #define TABELLE_QSTRING_H
 
 #include <QMessageBox>
+#include <QDate>
+#include <QTime>
 
 #include "liste_qstring.h"
 #include "Funktionen/umwandeln.h"
@@ -27,6 +29,8 @@ public:
     void clear();
     bool zeile_entfernen(int index);
     void sortieren_double(int index_sortierspalte);
+    void sortieren_datum(int index_sortierspalte);
+    void sortieren_zeit(int index_sortierspalte);
 
 private:
     liste_QString Tabkopf;

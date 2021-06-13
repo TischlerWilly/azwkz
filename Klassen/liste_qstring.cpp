@@ -124,6 +124,10 @@ int liste_QString::count()
 {
     return Vs.count();
 }
+bool liste_QString::isEmpty()
+{
+    return Vs.isEmpty();
+}
 
 //------------------Manipulationen:
 void liste_QString::clear()

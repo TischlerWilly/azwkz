@@ -26,6 +26,7 @@ public:
     text_zeilenweise werte_tz(int index, int anz_werte);
     liste_QString werte_liste(int index, int anz_werte);
     int count();
+    bool isEmpty();
 
     //Manipulationen:
     void clear();

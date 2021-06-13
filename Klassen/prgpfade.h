@@ -21,6 +21,7 @@ public:
     QString path_KoStFile();
     QString path_UserFile();
     QString path_MitarbFile();
+    QDir dir_import_az();
 
 
 private:
@@ -29,6 +30,7 @@ private:
     QString KoStFile;
     QString UserFile;
     QString MitarbFile;
+    QString ImportDirAZ;
 
 };
 

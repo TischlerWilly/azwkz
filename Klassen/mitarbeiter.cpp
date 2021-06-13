@@ -208,6 +208,19 @@ liste_QString mitarbeiter::zeile_nr(QString nr)
     }
     return lqs;
 }
+liste_QString mitarbeiter::zeile_idscan(QString id)
+{
+    liste_QString lqs;
+    for(int i=0;i<Mitarb.anz_zeilen();i++)
+    {
+        if(id == Mitarb.wert(i, INDEX_MITARB_IDSCANNER))
+        {
+            lqs = Mitarb.zeile(i);
+            break;
+        }
+    }
+    return lqs;
+}
 
 
 

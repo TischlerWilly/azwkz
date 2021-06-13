@@ -9,9 +9,12 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Dialoge/dialog_azimport.cpp \
     Dialoge/dialog_kostenstelle.cpp \
     Dialoge/dialog_mitarb_einzeln.cpp \
     Dialoge/dialog_mitarbeiter.cpp \
+    Funktionen/dateien.cpp \
+    Funktionen/text.cpp \
     Funktionen/umwandeln.cpp \
     Klassen/arbeitszeiten.cpp \
     Klassen/kostenstellen.cpp \
@@ -25,9 +28,12 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Dialoge/dialog_azimport.h \
     Dialoge/dialog_kostenstelle.h \
     Dialoge/dialog_mitarb_einzeln.h \
     Dialoge/dialog_mitarbeiter.h \
+    Funktionen/dateien.h \
+    Funktionen/text.h \
     Funktionen/umwandeln.h \
     Klassen/arbeitszeiten.h \
     Klassen/kostenstellen.h \
@@ -41,6 +47,7 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    Dialoge/dialog_azimport.ui \
     Dialoge/dialog_kostenstelle.ui \
     Dialoge/dialog_kostenstellen.ui \
     Dialoge/dialog_mitarb_einzeln.ui \
