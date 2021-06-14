@@ -81,9 +81,9 @@ void Dialog_azimport::on_pushButton_import_clicked()
                 Arbzeit->add(zeile);
             }
         }
-        Arbzeit->tabelle()->sortieren_zeit(INDEX_ARBZEIT_UHRZEIT);
-        //Arbzeit->tabelle()->sortieren_datum(INDEX_ARBZEIT_TAG);
-        //Arbzeit->tabelle()->sortieren_double(INDEX_ARBZEIT_IDSCAN);
+        Arbzeit->tabelle()->sortieren_double(INDEX_ARBZEIT_IDSCAN);
+        Arbzeit->tabelle()->sortieren_datum(INDEX_ARBZEIT_TAG);
+        //Arbzeit->tabelle()->sortieren_zeit(INDEX_ARBZEIT_UHRZEIT);
         //Arbzeit->tabelle()->sortieren_double(INDEX_ARBZEIT_KST);
     }
     update_tabelle();
@@ -98,6 +98,8 @@ void Dialog_azimport::update_tabelle()
         liste_QString tabkopf = Arbzeit->tabelle()->tabkopf();
         tabkopf.ersaetzen(INDEX_ARBZEIT_IDSCAN, "Mitarbeiter");
         ui->tableWidget->setHorizontalHeaderLabels(tabkopf.qstringlist());
+        bool sorting_enabled = ui->tableWidget->isSortingEnabled();
+        ui->tableWidget->setSortingEnabled(false);
         for(int i=0;i<Arbzeit->tabelle()->anz_zeilen();i++)
         {
             for(int ii=0;ii<=Arbzeit->tabelle()->anz_spalten();ii++)
@@ -124,6 +126,7 @@ void Dialog_azimport::update_tabelle()
                 }
             }
         }
+        ui->tableWidget->setSortingEnabled(sorting_enabled);
     }
 }
 

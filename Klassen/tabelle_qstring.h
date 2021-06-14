@@ -7,6 +7,8 @@
 
 #include "liste_qstring.h"
 #include "Funktionen/umwandeln.h"
+#include "Funktionen/text.h"
+#include "Funktionen/zeit_datum.h"
 
 class tabelle_qstring
 {

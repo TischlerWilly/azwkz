@@ -16,6 +16,7 @@ SOURCES += \
     Funktionen/dateien.cpp \
     Funktionen/text.cpp \
     Funktionen/umwandeln.cpp \
+    Funktionen/zeit_datum.cpp \
     Klassen/arbeitszeiten.cpp \
     Klassen/kostenstellen.cpp \
     Klassen/liste_qstring.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     Funktionen/dateien.h \
     Funktionen/text.h \
     Funktionen/umwandeln.h \
+    Funktionen/zeit_datum.h \
     Klassen/arbeitszeiten.h \
     Klassen/kostenstellen.h \
     Klassen/liste_qstring.h \
