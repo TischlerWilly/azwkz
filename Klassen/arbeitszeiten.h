@@ -15,6 +15,7 @@ public:
 
     text_zeilenweise tabelle_tz();
     tabelle_qstring *tabelle();
+    tabelle_qstring tabelle(QString idscan, QDate von, QDate bis);
 
 private:
     tabelle_qstring ArbZeit;

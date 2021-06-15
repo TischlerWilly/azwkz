@@ -66,7 +66,35 @@ tabelle_qstring *arbeitszeiten::tabelle()
 {
     return &ArbZeit;
 }
-
+tabelle_qstring arbeitszeiten::tabelle(QString idscan, QDate von, QDate bis)
+{
+    tabelle_qstring tab;
+    tab.set_tabkopf(ArbZeit.tabkopf());
+    for(int i=0;i<ArbZeit.anz_zeilen();i++)
+    {
+        if(idscan.isEmpty())
+        {
+            QDate datum_zeile;
+            datum_zeile = text_zu_qdate(ArbZeit.wert(i,INDEX_ARBZEIT_TAG));
+            if((von <= datum_zeile) && (datum_zeile <= bis))
+            {
+                tab.zeile_anhaengen(ArbZeit.zeile(i));
+            }
+        }else
+        {
+            if(ArbZeit.wert(i, INDEX_ARBZEIT_IDSCAN) == idscan)
+            {
+                QDate datum_zeile;
+                datum_zeile = text_zu_qdate(ArbZeit.wert(i,INDEX_ARBZEIT_TAG));
+                if((von <= datum_zeile) && (datum_zeile <= bis))
+                {
+                    tab.zeile_anhaengen(ArbZeit.zeile(i));
+                }
+            }
+        }
+    }
+    return tab;
+}
 
 
 

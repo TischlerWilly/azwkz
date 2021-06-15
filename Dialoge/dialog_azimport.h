@@ -27,6 +27,9 @@ public:
 private slots:
     void on_pushButton_import_clicked();
     void update_tabelle();
+    void on_comboBox_mitarb_currentIndexChanged(const QString &arg1);
+    void on_dateEdit_von_userDateChanged(const QDate &date);
+    void on_dateEdit_bis_userDateChanged(const QDate &date);
 
 private:
     Ui::Dialog_azimport *ui;

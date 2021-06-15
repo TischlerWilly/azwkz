@@ -1,7 +1,7 @@
 #ifndef TODO_H
 #define TODO_H
 
-#define PROGRAMMVERSION     "1.2021.06.14"
+#define PROGRAMMVERSION     "1.2021.06.15"
 /*#############################################################################
 Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 - Variablen beginnen mit einem großen Buchstaben
@@ -12,9 +12,7 @@ Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 #############################################################################
 in Arbeit:
 
-Dialog_azimport
-    void Dialog_azimport::update_tabelle()
-        -> Filterung der Tabelle möglich machen
+Tageszettel erstellen
 
 
 

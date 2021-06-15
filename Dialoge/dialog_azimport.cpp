@@ -88,9 +88,21 @@ void Dialog_azimport::on_pushButton_import_clicked()
     }
     update_tabelle();
 }
+void Dialog_azimport::on_comboBox_mitarb_currentIndexChanged(const QString &arg1)
+{
+    update_tabelle();
+}
+void Dialog_azimport::on_dateEdit_von_userDateChanged(const QDate &date)
+{
+    update_tabelle();
+}
+void Dialog_azimport::on_dateEdit_bis_userDateChanged(const QDate &date)
+{
+    update_tabelle();
+}
 void Dialog_azimport::update_tabelle()
 {
-    if(Arbzeit != NULL)
+    if((Arbzeit != NULL) && (Mitarb != NULL))
     {
         ui->tableWidget->clear();
         ui->tableWidget->setColumnCount(Arbzeit->tabelle()->anz_spalten());//Spaltenanzahl
@@ -100,13 +112,31 @@ void Dialog_azimport::update_tabelle()
         ui->tableWidget->setHorizontalHeaderLabels(tabkopf.qstringlist());
         bool sorting_enabled = ui->tableWidget->isSortingEnabled();
         ui->tableWidget->setSortingEnabled(false);
-        for(int i=0;i<Arbzeit->tabelle()->anz_zeilen();i++)
+        //Tabelle filtern:
+        tabelle_qstring tab;
+        QString idscan;
+        if(ui->comboBox_mitarb->currentText() != "Alle")
         {
-            for(int ii=0;ii<=Arbzeit->tabelle()->anz_spalten();ii++)
+            QString nr = text_links(ui->comboBox_mitarb->currentText(), " ");
+            if(nr.toInt() != 0)
             {
-                ui->tableWidget->setItem(i,ii, new QTableWidgetItem(Arbzeit->tabelle()->wert(i,ii)));
+                idscan = Mitarb->zeile_nr(nr).wert(INDEX_MITARB_IDSCANNER);
             }
-            QString idscan = Arbzeit->tabelle()->wert(i,INDEX_ARBZEIT_IDSCAN);
+            if(idscan.isEmpty())
+            {
+                idscan = "void";
+            }
+        }
+        tab = Arbzeit->tabelle(idscan, ui->dateEdit_von->date(), ui->dateEdit_bis->date());
+        ui->tableWidget->setRowCount(tab.anz_zeilen());//Zeilenanzahl
+        //Tabelle anzeigen
+        for(int i=0;i<tab.anz_zeilen();i++)
+        {
+            for(int ii=0;ii<=tab.anz_spalten();ii++)
+            {
+                ui->tableWidget->setItem(i,ii, new QTableWidgetItem(tab.wert(i,ii)));
+            }
+            QString idscan = tab.wert(i,INDEX_ARBZEIT_IDSCAN);
             if(Mitarb != NULL)
             {
                 liste_QString mitarb = Mitarb->zeile_idscan(idscan);
@@ -129,6 +159,8 @@ void Dialog_azimport::update_tabelle()
         ui->tableWidget->setSortingEnabled(sorting_enabled);
     }
 }
+
+
 
 
 
