@@ -36,8 +36,15 @@
     </property>
     <addaction name="actionBenutzerverwaltung"/>
    </widget>
+   <widget class="QMenu" name="menuZeiterfassung">
+    <property name="title">
+     <string>Zeiterfassung</string>
+    </property>
+    <addaction name="actionTageszettel"/>
+   </widget>
    <addaction name="menuStammdaten"/>
    <addaction name="menuEinstellungen"/>
+   <addaction name="menuZeiterfassung"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionKostenstellen">
@@ -53,6 +60,11 @@
   <action name="actionBenutzerverwaltung">
    <property name="text">
     <string>Benutzerverwaltung</string>
+   </property>
+  </action>
+  <action name="actionTageszettel">
+   <property name="text">
+    <string>Tageszettel</string>
    </property>
   </action>
  </widget>

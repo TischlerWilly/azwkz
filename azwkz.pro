@@ -13,6 +13,7 @@ SOURCES += \
     Dialoge/dialog_kostenstelle.cpp \
     Dialoge/dialog_mitarb_einzeln.cpp \
     Dialoge/dialog_mitarbeiter.cpp \
+    Dialoge/dialog_tageszettel.cpp \
     Funktionen/dateien.cpp \
     Funktionen/text.cpp \
     Funktionen/umwandeln.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     Dialoge/dialog_kostenstelle.h \
     Dialoge/dialog_mitarb_einzeln.h \
     Dialoge/dialog_mitarbeiter.h \
+    Dialoge/dialog_tageszettel.h \
     Funktionen/dateien.h \
     Funktionen/text.h \
     Funktionen/umwandeln.h \
@@ -54,6 +56,7 @@ FORMS += \
     Dialoge/dialog_kostenstellen.ui \
     Dialoge/dialog_mitarb_einzeln.ui \
     Dialoge/dialog_mitarbeiter.ui \
+    Dialoge/dialog_tageszettel.ui \
     mainwindow.ui
 
 # Default rules for deployment.

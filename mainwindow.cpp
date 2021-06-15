@@ -21,7 +21,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&Dlg_Mitarb, SIGNAL(signal_mitarb(mitarbeiter)), this, SLOT(slot_mitarb(mitarbeiter)));
 
     Dlg_azimport.set_Mitarb(&Mitarb);
+    Dlg_tagzet.set_Mitarb(&Mitarb);
+
     Dlg_azimport.set_Arbzeit(&Arbzeit);
+    Dlg_tagzet.set_Arbzeit(&Arbzeit);
 }
 
 MainWindow::~MainWindow()
@@ -54,3 +57,8 @@ void MainWindow::on_actionMitarbeiter_triggered()
     Dlg_Mitarb.show();
 }
 
+
+void MainWindow::on_actionTageszettel_triggered()
+{
+    Dlg_tagzet.exec();
+}

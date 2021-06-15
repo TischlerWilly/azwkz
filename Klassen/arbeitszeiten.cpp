@@ -51,6 +51,47 @@ void arbeitszeiten::clear()
 {
     ArbZeit.clear();
 }
+void arbeitszeiten::import()
+{
+    prgpfade pf;
+    QDir idir = pf.dir_import_az();
+    liste_QString dateien = dateien_erfassen(idir);
+    for(int i=0;i<dateien.count();i++)//Datei für Datei einlesen
+    {
+        QFile f(dateien.qstringlist().at(i));
+        text_zeilenweise tz;
+        if(!f.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            QString msg;
+            msg = "Fehler beim zugriff auf die Datei \"";
+            msg += dateien.qstringlist().at(i);
+            msg += "\"!";
+            QMessageBox::warning(new QDialog,"Fehler",msg,QMessageBox::Ok);
+        }else
+        {
+            tz.set_text(QString::fromLatin1(f.readAll()));
+        }
+        for(uint ii=2;ii<tz.zeilenanzahl();ii++)//Zeile für Zeile speichern
+        {//Erst in 2. Zeile beginnen weil 1. Zeile Tabellenkpf ist
+            text_zeilenweise zeile_tz;
+            zeile_tz.set_trennzeichen('\t');
+            zeile_tz.set_text(tz.zeile(ii));
+            liste_QString zeile;
+            QString idscan, tag, zeit, proj, kst;
+            idscan = zeile_tz.zeile(4);
+            tag = zeile_tz.zeile(5);
+            zeit = zeile_tz.zeile(3);
+            proj = zeile_tz.zeile(1);
+            kst = zeile_tz.zeile(2);
+            zeile.anhaengen(idscan);
+            zeile.anhaengen(tag);
+            zeile.anhaengen(text_links(zeit,"Uhr"));
+            zeile.anhaengen(proj);
+            zeile.anhaengen(kst);
+            add(zeile);
+        }
+    }
+}
 
 //-------------get:
 text_zeilenweise arbeitszeiten::tabelle_tz()

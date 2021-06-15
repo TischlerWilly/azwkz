@@ -44,6 +44,16 @@ int tabelle_qstring::anz_zeilen()
 {
     return Liqs.count();
 }
+bool tabelle_qstring::isEmpty()
+{
+    if(anz_zeilen() == 0)
+    {
+        return true;
+    }else
+    {
+        return false;
+    }
+}
 text_zeilenweise tabelle_qstring::tabelle_tz(char trennz_zeile, char trennz_spalte)
 {
     text_zeilenweise tz;

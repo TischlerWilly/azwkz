@@ -9,6 +9,7 @@
 #include "Dialoge/dialog_kostenstellen.h"
 #include "Dialoge/dialog_mitarbeiter.h"
 #include "Dialoge/dialog_azimport.h"
+#include "Dialoge/dialog_tageszettel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,6 +30,8 @@ private slots:
     void on_actionKostenstellen_triggered();
     void on_actionMitarbeiter_triggered();
 
+    void on_actionTageszettel_triggered();
+
 private:
     Ui::MainWindow *ui;
     prgpfade prgpf;
@@ -38,6 +41,7 @@ private:
     Dialog_Kostenstellen Dlg_KoSt;
     Dialog_Mitarbeiter Dlg_Mitarb;
     Dialog_azimport Dlg_azimport;
+    Dialog_tageszettel Dlg_tagzet;
 
 };
 #endif // MAINWINDOW_H

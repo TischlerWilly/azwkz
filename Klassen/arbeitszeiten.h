@@ -1,7 +1,11 @@
 #ifndef ARBEITSZEITEN_H
 #define ARBEITSZEITEN_H
 
+#include <QMessageBox>
+
 #include "Klassen/tabelle_qstring.h"
+#include "Klassen/prgpfade.h"
+#include "Funktionen/dateien.h"
 
 class arbeitszeiten
 {
@@ -12,6 +16,7 @@ public:
     bool add(liste_QString z);
     bool del(liste_QString z);
     void clear();
+    void import();
 
     text_zeilenweise tabelle_tz();
     tabelle_qstring *tabelle();

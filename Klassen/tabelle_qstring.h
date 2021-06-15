@@ -22,6 +22,7 @@ public:
     //get_xy:
     int anz_spalten();
     int anz_zeilen();
+    bool isEmpty();
     text_zeilenweise tabelle_tz(char trennz_zeile, char trennz_spalte);
     liste_QString zeile(int index);
     liste_QString tabkopf();
