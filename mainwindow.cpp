@@ -31,13 +31,12 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
     Dlg_azimport.move(0,20);
+    Dlg_azimport.setFixedSize(this->width(), this->height());
     QMainWindow::resizeEvent(event);
 }
-
 void MainWindow::slot_kost(kostenstellen k)
 {
     KoSt = k;
@@ -47,7 +46,6 @@ void MainWindow::slot_mitarb(mitarbeiter m)
     Mitarb = m;
     Dlg_azimport.set_Mitarb(&Mitarb);
 }
-
 void MainWindow::on_actionKostenstellen_triggered()
 {
     Dlg_KoSt.show();
@@ -56,9 +54,24 @@ void MainWindow::on_actionMitarbeiter_triggered()
 {
     Dlg_Mitarb.show();
 }
-
-
 void MainWindow::on_actionTageszettel_triggered()
 {
     Dlg_tagzet.exec();
 }
+void MainWindow::on_actionImport_Uebersicht_triggered()
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

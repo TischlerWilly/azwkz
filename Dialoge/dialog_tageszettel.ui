@@ -23,26 +23,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView_tagzet">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>370</y>
-     <width>711</width>
-     <height>291</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTableView" name="tableView_import">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>40</y>
-     <width>711</width>
-     <height>321</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_mitarb">
    <property name="geometry">
     <rect>
@@ -63,6 +43,26 @@
      <y>10</y>
      <width>312</width>
      <height>183</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget_import">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>40</y>
+     <width>711</width>
+     <height>321</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget_tagzet">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>370</y>
+     <width>711</width>
+     <height>291</height>
     </rect>
    </property>
   </widget>

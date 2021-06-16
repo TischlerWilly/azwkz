@@ -94,7 +94,6 @@ void Dialog_kostenstelle::on_pushButton_ok_clicked()
         }
     }
 }
-
 void Dialog_kostenstelle::on_pushButton_abbrechen_clicked()
 {
     this->close();

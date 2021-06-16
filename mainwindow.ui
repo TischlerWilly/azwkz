@@ -41,6 +41,7 @@
      <string>Zeiterfassung</string>
     </property>
     <addaction name="actionTageszettel"/>
+    <addaction name="actionImport_Uebersicht"/>
    </widget>
    <addaction name="menuStammdaten"/>
    <addaction name="menuEinstellungen"/>
@@ -65,6 +66,11 @@
   <action name="actionTageszettel">
    <property name="text">
     <string>Tageszettel</string>
+   </property>
+  </action>
+  <action name="actionImport_Uebersicht">
+   <property name="text">
+    <string>Import-Übersicht</string>
    </property>
   </action>
  </widget>

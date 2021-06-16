@@ -16,6 +16,38 @@ Dialog_azimport::~Dialog_azimport()
 {
     delete ui;
 }
+void Dialog_azimport::resizeEvent(QResizeEvent *event)
+{
+    int b_gesamt = this->width()-5;
+    int b_label = 30;
+    int b_dateedit = ui->dateEdit_bis->width();
+    int b_btn = ui->pushButton_import->width();
+    int b_combox = b_gesamt - 2*b_label - 2*b_dateedit -b_btn - 5*5;
+    if(b_combox > 300)
+    {
+        b_combox = 300;
+    }
+    ui->comboBox_mitarb->move(2,2);
+    ui->comboBox_mitarb->setFixedWidth(b_combox);
+
+    ui->label_von->move(ui->comboBox_mitarb->x()+b_combox+5,2);
+    ui->label_von->setFixedWidth(b_label);
+
+    ui->dateEdit_von->move(ui->label_von->x()+b_label+5,2);
+
+    ui->label_bis->move(ui->dateEdit_von->x()+ui->dateEdit_von->width()+5,2);
+    ui->label_bis->setFixedWidth(b_label);
+
+    ui->dateEdit_bis->move(ui->label_bis->x()+b_label+5,2);
+
+    ui->pushButton_import->move(ui->dateEdit_bis->x()+ui->dateEdit_bis->width()+5,2);
+
+    ui->tableWidget->move(2,ui->comboBox_mitarb->y()+ui->comboBox_mitarb->height()+2);
+    ui->tableWidget->setFixedWidth(b_gesamt);
+    ui->tableWidget->setFixedHeight(this->height() -2-ui->comboBox_mitarb->height()-2-25);
+
+    QDialog::resizeEvent(event);
+}
 void Dialog_azimport::set_Mitarb(mitarbeiter *m)
 {
     Mitarb = m;

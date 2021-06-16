@@ -27,13 +27,19 @@ public:
 private slots:
     void on_tableWidget_mitarb_cellClicked(int row, int column);
 
+    void on_calendarWidget_clicked(const QDate &date);
+
 private:
+    void resizeEvent(QResizeEvent *event);
     Ui::Dialog_tageszettel *ui;
     mitarbeiter *Mitarb;
     arbeitszeiten *Arbzeit;
     tabelle_qstring Tab_mitarb;
+    tabelle_qstring Tab_arbzeit;
 
     void update_tab_mitarb();
+    void update_label_mitarb();
+    void update_tab_import();
 };
 
 #endif // DIALOG_TAGESZETTEL_H

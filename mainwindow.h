@@ -32,6 +32,8 @@ private slots:
 
     void on_actionTageszettel_triggered();
 
+    void on_actionImport_Uebersicht_triggered();
+
 private:
     Ui::MainWindow *ui;
     prgpfade prgpf;

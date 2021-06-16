@@ -25,6 +25,7 @@ public:
     void set_Arbzeit(arbeitszeiten *az);
 
 private slots:
+    void resizeEvent(QResizeEvent *event);
     void on_pushButton_import_clicked();
     void update_tabelle();
     void on_comboBox_mitarb_currentIndexChanged(const QString &arg1);
