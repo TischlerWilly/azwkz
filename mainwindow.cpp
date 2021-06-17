@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     prgpf.ordner_erstellen();
 
     Dlg_azimport.setParent(this);
+    Dlg_tagzet.setParent(this);
+    Dlg_azimport.hide();
 
     KoSt.initialisieren();
     Mitarb.initialisieren();
@@ -25,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     Dlg_azimport.set_Arbzeit(&Arbzeit);
     Dlg_tagzet.set_Arbzeit(&Arbzeit);
+
+    this->setWindowState(Qt::WindowMaximized);
 }
 
 MainWindow::~MainWindow()
@@ -35,6 +39,10 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 {
     Dlg_azimport.move(0,20);
     Dlg_azimport.setFixedSize(this->width(), this->height());
+
+    Dlg_tagzet.move(0,20);
+    Dlg_tagzet.setFixedSize(this->width(), this->height());
+
     QMainWindow::resizeEvent(event);
 }
 void MainWindow::slot_kost(kostenstellen k)
@@ -56,11 +64,13 @@ void MainWindow::on_actionMitarbeiter_triggered()
 }
 void MainWindow::on_actionTageszettel_triggered()
 {
-    Dlg_tagzet.exec();
+    Dlg_azimport.hide();
+    Dlg_tagzet.show();
 }
 void MainWindow::on_actionImport_Uebersicht_triggered()
 {
-
+    Dlg_tagzet.hide();
+    Dlg_azimport.show();
 }
 
 

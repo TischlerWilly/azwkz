@@ -17,7 +17,50 @@ Dialog_tageszettel::~Dialog_tageszettel()
 }
 void Dialog_tageszettel::resizeEvent(QResizeEvent *event)
 {
+    int rand_un = 30;
+    int rand_re = 10;
+    ui->calendarWidget->move(2,2);
+    int b_calendar = this->width()/8*3;
+    if(b_calendar < 320)
+    {
+        b_calendar = 320;
+    }else if(b_calendar > 400)
+    {
+        b_calendar = 400;
+    }
+    ui->calendarWidget->setFixedWidth(b_calendar);
 
+    ui->tableWidget_mitarb->move(2,ui->calendarWidget->y()+ui->calendarWidget->height()+5);
+    ui->tableWidget_mitarb->setFixedWidth(ui->calendarWidget->width());
+    int h_tab_mitarb = this->height() - ui->tableWidget_mitarb->y() - rand_un;
+    ui->tableWidget_mitarb->setFixedHeight(h_tab_mitarb);
+
+    ui->label_mitarb->move(ui->calendarWidget->x()+ui->calendarWidget->width()+5,2);
+
+    ui->tableWidget_import->move(ui->label_mitarb->x(),35);
+    int h_tab_import = (this->height() - this->y())/8*5;
+    ui->tableWidget_import->setFixedHeight(h_tab_import);
+    int b_tab_import = this->width() - ui->tableWidget_import->x() - rand_re;
+    int b_tab_tagzet = b_tab_import;
+    int b_tab_kst = b_tab_import/8*3;
+    if(b_tab_kst > 300)
+    {
+        b_tab_import = b_tab_import - b_tab_kst - 5;
+        ui->tableWidget_kst->show();
+        ui->tableWidget_kst->move(ui->tableWidget_import->x()+b_tab_import+5, \
+                                  ui->tableWidget_import->y());
+        ui->tableWidget_kst->setFixedWidth(b_tab_kst);
+        ui->tableWidget_kst->setFixedHeight(ui->tableWidget_import->height());
+    }else
+    {
+        ui->tableWidget_kst->hide();
+    }
+    ui->tableWidget_import->setFixedWidth(b_tab_import);
+
+    ui->tableWidget_tagzet->move(ui->label_mitarb->x(),ui->tableWidget_import->y()+ui->tableWidget_import->height()+5);
+    int h_tab_tagzet = this->height() - ui->tableWidget_tagzet->y() - rand_un;
+    ui->tableWidget_tagzet->setFixedHeight(h_tab_tagzet);
+    ui->tableWidget_tagzet->setFixedWidth(b_tab_tagzet);
 
     QDialog::resizeEvent(event);
 }

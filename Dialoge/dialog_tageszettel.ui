@@ -51,7 +51,7 @@
     <rect>
      <x>330</x>
      <y>40</y>
-     <width>711</width>
+     <width>431</width>
      <height>321</height>
     </rect>
    </property>
@@ -63,6 +63,16 @@
      <y>370</y>
      <width>711</width>
      <height>291</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget_kst">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>40</y>
+     <width>271</width>
+     <height>321</height>
     </rect>
    </property>
   </widget>

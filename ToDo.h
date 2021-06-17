@@ -1,7 +1,7 @@
 #ifndef TODO_H
 #define TODO_H
 
-#define PROGRAMMVERSION     "1.2021.06.16"
+#define PROGRAMMVERSION     "1.2021.06.17"
 /*#############################################################################
 Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 - Variablen beginnen mit einem großen Buchstaben
@@ -12,13 +12,9 @@ Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 #############################################################################
 in Arbeit:
 
-void Dialog_tageszettel::resizeEvent(QResizeEvent *event)
-
-Mainwindow als Parent setzen und zwischen Sichtbarkeiten umschalten:
-    void MainWindow::on_actionTageszettel_triggered()
-    void MainWindow::on_actionImport_Uebersicht_triggered()
-
-Tageszettel erstellen
+Dialog_tageszettel:
+    tabelle kst mit Leben füllen
+    Tageszettel erstellen
 
 
 
