@@ -161,4 +161,16 @@ liste_QString kostenstellen::zeile_nr(QString nr)
     }
     return lqs;
 }
-
+QString kostenstellen::bez(QString nr)
+{
+    QString bez;
+    for(int i=0;i<KoSt.anz_zeilen();i++)
+    {
+        if(nr == KoSt.wert(i, INDEX_KOST_NUMMER))
+        {
+            bez = KoSt.wert(i, INDEX_KOST_BEZEICHUNG);
+            break;
+        }
+    }
+    return bez;
+}

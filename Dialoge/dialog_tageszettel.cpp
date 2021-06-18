@@ -8,6 +8,7 @@ Dialog_tageszettel::Dialog_tageszettel(QWidget *parent) :
     ui->setupUi(this);
     Mitarb = NULL;
     Arbzeit = NULL;
+    KoSt = NULL;
     ui->label_mitarb->setText("");
     ui->tableWidget_mitarb->setSortingEnabled(true);
 }
@@ -64,11 +65,41 @@ void Dialog_tageszettel::resizeEvent(QResizeEvent *event)
 
     QDialog::resizeEvent(event);
 }
+
 void Dialog_tageszettel::set_Mitarb(mitarbeiter *m)
 {
     Mitarb = m;
     update_tab_mitarb();
 }
+void Dialog_tageszettel::set_Arbzeit(arbeitszeiten *az)
+{
+    Arbzeit = az;
+}
+void Dialog_tageszettel::set_KoSt(kostenstellen *kst)
+{
+    KoSt = kst;
+    update_tab_kost();
+}
+
+void Dialog_tageszettel::update_label_mitarb()
+{
+    if(!Tab_mitarb.isEmpty())
+    {
+        int row = ui->tableWidget_mitarb->currentRow();
+        if(row >= 0)
+        {
+            //Namen in Label schreiben:
+            QString name;
+            name = Tab_mitarb.wert(row, INDEX_MITARB_NUMMER);
+            name += " ";
+            name += Tab_mitarb.wert(row, INDEX_MITARB_VORNAME);
+            name += " ";
+            name += Tab_mitarb.wert(row, INDEX_MITARB_NACHNAME);
+            ui->label_mitarb->setText(name);
+        }
+    }
+}
+
 void Dialog_tageszettel::update_tab_mitarb()
 {
     if(Mitarb != NULL)
@@ -96,28 +127,11 @@ void Dialog_tageszettel::update_tab_mitarb()
         ui->tableWidget_mitarb->setSortingEnabled(sorting_enabled);
     }
 }
-void Dialog_tageszettel::update_label_mitarb()
-{
-    if(!Tab_mitarb.isEmpty())
-    {
-        int row = ui->tableWidget_mitarb->currentRow();
-        if(row >= 0)
-        {
-            //Namen in Label schreiben:
-            QString name;
-            name = Tab_mitarb.wert(row, INDEX_MITARB_NUMMER);
-            name += " ";
-            name += Tab_mitarb.wert(row, INDEX_MITARB_VORNAME);
-            name += " ";
-            name += Tab_mitarb.wert(row, INDEX_MITARB_NACHNAME);
-            ui->label_mitarb->setText(name);
-        }
-    }
-}
 void Dialog_tageszettel::update_tab_import()
 {
     if(!Tab_mitarb.isEmpty() && Arbzeit != NULL)
     {
+
         int row = ui->tableWidget_mitarb->currentRow();
         if(row >= 0)
         {
@@ -127,10 +141,24 @@ void Dialog_tageszettel::update_tab_import()
                 QDate datum = ui->calendarWidget->selectedDate();
                 Arbzeit->import();
                 Tab_arbzeit = Arbzeit->tabelle(idscan, datum, datum);
+                if(KoSt != NULL)
+                {
+                    for(int i=0;i<Tab_arbzeit.anz_zeilen();i++)
+                    {
+                        QString nr  = Tab_arbzeit.wert(i,INDEX_ARBZEIT_KST);
+                        QString bez = KoSt->bez(nr);
+                        QString anzeigetext;
+                        anzeigetext = nr;
+                        anzeigetext += "   ";
+                        anzeigetext += bez;
+                        Tab_arbzeit.set_wert(i, INDEX_ARBZEIT_KST, anzeigetext);
+                    }
+                }
                 ui->tableWidget_import->clear();
                 ui->tableWidget_import->setColumnCount(Tab_arbzeit.anz_spalten());//Spaltenanzahl
                 ui->tableWidget_import->setRowCount(Tab_arbzeit.anz_zeilen());//Zeilenanzahl
                 ui->tableWidget_import->setHorizontalHeaderLabels(Tab_arbzeit.tabkopf().qstringlist());
+                ui->tableWidget_import->setColumnWidth(INDEX_ARBZEIT_KST, 300);//Pers-Nr.
                 bool sortieren_aktiv = ui->tableWidget_import->isSortingEnabled();
                 ui->tableWidget_import->setSortingEnabled(false);
                 for(int i=0;i<Tab_arbzeit.anz_zeilen();i++)
@@ -138,6 +166,10 @@ void Dialog_tageszettel::update_tab_import()
                     for(int ii=0;ii<Tab_arbzeit.anz_spalten();ii++)
                     {
                         ui->tableWidget_import->setItem(i,ii,new QTableWidgetItem(Tab_arbzeit.wert(i,ii)));
+                        if(Tab_arbzeit.wert(i,INDEX_ARBZEIT_KST).contains("000"))
+                        {
+                            ui->tableWidget_import->item(i,ii)->setBackground(Qt::gray);
+                        }
                     }
                 }
                 ui->tableWidget_import->setSortingEnabled(sortieren_aktiv);
@@ -149,10 +181,35 @@ void Dialog_tageszettel::update_tab_import()
         }
     }
 }
-void Dialog_tageszettel::set_Arbzeit(arbeitszeiten *az)
+void Dialog_tageszettel::update_tab_kost()
 {
-    Arbzeit = az;
+    if(KoSt != NULL)
+    {
+        bool sorting_enabled = ui->tableWidget_kst->isSortingEnabled();
+        ui->tableWidget_kst->setSortingEnabled(false);
+        //interne Tabelle:
+        Tab_kst.clear();
+        Tab_kst = *KoSt->tabelle();
+        Tab_kst.sortieren_double(INDEX_KOST_NUMMER);
+        //ui:
+        ui->tableWidget_kst->clear();
+        ui->tableWidget_kst->setColumnCount(Tab_kst.anz_spalten());//Spaltenanzahl
+        ui->tableWidget_kst->setRowCount(Tab_kst.anz_zeilen());//Zeilenanzahl
+        ui->tableWidget_kst->setHorizontalHeaderLabels(Tab_kst.tabkopf().qstringlist());
+        ui->tableWidget_kst->setColumnWidth(0, 80);//Nr.
+        ui->tableWidget_kst->setColumnWidth(1, 400);//Bez
+        //Tabelle anzeigen
+        for(int i=0;i<Tab_kst.anz_zeilen();i++)
+        {
+            for(int ii=0;ii<=Tab_kst.anz_spalten();ii++)
+            {
+                ui->tableWidget_kst->setItem(i,ii, new QTableWidgetItem(Tab_kst.wert(i,ii)));
+            }
+        }
+        ui->tableWidget_kst->setSortingEnabled(sorting_enabled);
+    }
 }
+
 void Dialog_tageszettel::on_tableWidget_mitarb_cellClicked(int row, int column)
 {
     update_label_mitarb();

@@ -13,7 +13,6 @@ Diese Klassen-Design-Regeln habe ich mir vorgenommen:
 in Arbeit:
 
 Dialog_tageszettel:
-    tabelle kst mit Leben füllen
     Tageszettel erstellen
 
 

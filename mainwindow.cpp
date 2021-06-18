@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     Dlg_azimport.set_Arbzeit(&Arbzeit);
     Dlg_tagzet.set_Arbzeit(&Arbzeit);
 
+    Dlg_tagzet.set_KoSt(&KoSt);
+
     this->setWindowState(Qt::WindowMaximized);
 }
 

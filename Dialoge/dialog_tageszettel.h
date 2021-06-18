@@ -7,6 +7,7 @@
 #include "Klassen/prgpfade.h"
 #include "Klassen/arbeitszeiten.h"
 #include "Klassen/mitarbeiter.h"
+#include "Klassen/kostenstellen.h"
 #include "Funktionen/dateien.h"
 #include "Funktionen/text.h"
 
@@ -23,6 +24,7 @@ public:
     ~Dialog_tageszettel();
     void set_Mitarb(mitarbeiter *m);
     void set_Arbzeit(arbeitszeiten *az);
+    void set_KoSt(kostenstellen *kst);
 
 private slots:
     void on_tableWidget_mitarb_cellClicked(int row, int column);
@@ -34,12 +36,15 @@ private:
     Ui::Dialog_tageszettel *ui;
     mitarbeiter *Mitarb;
     arbeitszeiten *Arbzeit;
+    kostenstellen *KoSt;
     tabelle_qstring Tab_mitarb;
     tabelle_qstring Tab_arbzeit;
+    tabelle_qstring Tab_kst;
 
     void update_tab_mitarb();
     void update_label_mitarb();
     void update_tab_import();
+    void update_tab_kost();
 };
 
 #endif // DIALOG_TAGESZETTEL_H
