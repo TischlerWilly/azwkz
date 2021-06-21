@@ -12,6 +12,36 @@ QTime text_zu_qtime(QString s)
     }
     return t;
 }
+QTime minus(QTime minuent, QTime subtrahend)
+{
+    QTime ret_time;
+    int minuent_h = minuent.hour();
+    int minuent_min = minuent.minute();
+    int subtrahend_h = subtrahend.hour();
+    int subtrahend_min = subtrahend.minute();
+    int dif_h = 0;
+    int dif_min = 0;
+    if(minuent > subtrahend)//beide Uhrzeiten sind am selben Tag
+    {
+        dif_h = minuent_h - subtrahend_h;
+        if(minuent_min >= subtrahend_min)
+        {
+            dif_min = minuent_min - subtrahend_min;
+        }else
+        {
+            dif_min = 60 - (subtrahend_min - minuent_min);
+        }
+    }else//beide Uhrzeiten sind nicht am selben Tag
+    {
+        //noch programmieren
+        //...
+        //...
+        //...
+        //...
+    }
+    ret_time.setHMS(dif_h, dif_min, 0);
+    return ret_time;
+}
 
 QDate text_zu_qdate(QString s)
 {

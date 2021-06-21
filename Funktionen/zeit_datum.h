@@ -9,6 +9,7 @@
 #include "Funktionen/text.h"
 
 QTime text_zu_qtime(QString s);
+QTime minus(QTime minuent, QTime subtrahend);
 
 QDate text_zu_qdate(QString s);
 

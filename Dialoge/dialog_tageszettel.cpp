@@ -58,10 +58,13 @@ void Dialog_tageszettel::resizeEvent(QResizeEvent *event)
     }
     ui->tableWidget_import->setFixedWidth(b_tab_import);
 
+    b_tab_tagzet = b_tab_tagzet - ui->pushButton_tagzet_erstellen->width() - 5;
     ui->tableWidget_tagzet->move(ui->label_mitarb->x(),ui->tableWidget_import->y()+ui->tableWidget_import->height()+5);
     int h_tab_tagzet = this->height() - ui->tableWidget_tagzet->y() - rand_un;
     ui->tableWidget_tagzet->setFixedHeight(h_tab_tagzet);
     ui->tableWidget_tagzet->setFixedWidth(b_tab_tagzet);
+
+    ui->pushButton_tagzet_erstellen->move(ui->tableWidget_tagzet->x()+b_tab_tagzet+5, ui->tableWidget_tagzet->y());
 
     QDialog::resizeEvent(event);
 }
@@ -219,4 +222,37 @@ void Dialog_tageszettel::on_calendarWidget_clicked(const QDate &date)
 {
     update_label_mitarb();
     update_tab_import();
+}
+
+void Dialog_tageszettel::on_pushButton_tagzet_erstellen_clicked()
+{
+    if(!Tab_mitarb.isEmpty() && Arbzeit != NULL && KoSt != NULL)
+    {
+        int row = ui->tableWidget_mitarb->currentRow();
+        if(row >= 0)
+        {
+            QString idscan = Tab_mitarb.wert(row, INDEX_MITARB_IDSCANNER);
+            if(!idscan.isEmpty())
+            {
+                QDate datum = ui->calendarWidget->selectedDate();
+                Arbzeit->import();
+                Tab_tagzet = Arbzeit->tagzet(idscan, datum);
+                ui->tableWidget_tagzet->clear();
+                ui->tableWidget_tagzet->setColumnCount(Tab_tagzet.anz_spalten());//Spaltenanzahl
+                ui->tableWidget_tagzet->setRowCount(Tab_tagzet.anz_zeilen());//Zeilenanzahl
+                ui->tableWidget_tagzet->setHorizontalHeaderLabels(Tab_tagzet.tabkopf().qstringlist());
+                ui->tableWidget_tagzet->setColumnWidth(INDEX_ARBZEIT_KST, 300);//Pers-Nr.
+                bool sortieren_aktiv = ui->tableWidget_tagzet->isSortingEnabled();
+                ui->tableWidget_import->setSortingEnabled(false);
+                for(int i=0;i<Tab_tagzet.anz_zeilen();i++)
+                {
+                    for(int ii=0;ii<Tab_tagzet.anz_spalten();ii++)
+                    {
+                        ui->tableWidget_tagzet->setItem(i,ii,new QTableWidgetItem(Tab_tagzet.wert(i,ii)));
+                    }
+                }
+                ui->tableWidget_tagzet->setSortingEnabled(sortieren_aktiv);
+            }
+        }
+    }
 }

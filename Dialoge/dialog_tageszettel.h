@@ -31,6 +31,8 @@ private slots:
 
     void on_calendarWidget_clicked(const QDate &date);
 
+    void on_pushButton_tagzet_erstellen_clicked();
+
 private:
     void resizeEvent(QResizeEvent *event);
     Ui::Dialog_tageszettel *ui;
@@ -40,6 +42,7 @@ private:
     tabelle_qstring Tab_mitarb;
     tabelle_qstring Tab_arbzeit;
     tabelle_qstring Tab_kst;
+    tabelle_qstring Tab_tagzet;
 
     void update_tab_mitarb();
     void update_label_mitarb();

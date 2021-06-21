@@ -136,7 +136,42 @@ tabelle_qstring arbeitszeiten::tabelle(QString idscan, QDate von, QDate bis)
     }
     return tab;
 }
+tabelle_qstring arbeitszeiten::tagzet(QString idscan, QDate tag)
+{
+    tabelle_qstring tab_ret, tab_import;
+    tab_import = tabelle(idscan, tag, tag);
+    QTime az_begin, az_ende, dauer_anwesenheit;
+    bool begin_gesetzt = false;
+    for(int i=0;i<tab_import.anz_zeilen();i++)
+    {
+        QString kst = tab_import.wert(i, INDEX_ARBZEIT_KST);
+        QString zeit = tab_import.wert(i, INDEX_ARBZEIT_UHRZEIT);
+        if(kst != "000")
+        {
+            if(begin_gesetzt == false)
+            {
+                az_begin = text_zu_qtime(zeit);
+                begin_gesetzt = true;
+            }
+        }else
+        {
+            az_ende = text_zu_qtime(zeit);
+        }
+    }
+    dauer_anwesenheit = minus(az_ende, az_begin);
 
+    QString msg;
+    msg = az_begin.toString();
+    msg += "\n";
+    msg += az_ende.toString();
+    msg += "\n";
+    msg += dauer_anwesenheit.toString();
+    QMessageBox mb;
+    mb.setText(msg);
+    mb.exec();
+
+    return tab_ret;
+}
 
 
 
