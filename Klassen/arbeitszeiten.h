@@ -6,6 +6,7 @@
 #include "Klassen/tabelle_qstring.h"
 #include "Klassen/prgpfade.h"
 #include "Funktionen/dateien.h"
+#include "Dialoge/dialog_zeitabfrage.h"
 
 class arbeitszeiten
 {

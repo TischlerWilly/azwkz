@@ -140,32 +140,80 @@ tabelle_qstring arbeitszeiten::tagzet(QString idscan, QDate tag)
 {
     tabelle_qstring tab_ret, tab_import;
     tab_import = tabelle(idscan, tag, tag);
-    QTime az_begin, az_ende, dauer_anwesenheit;
+    QTime az_begin, az_ende, dauer_anwesenheit, dauer_pausen, az_dauer;
+    dauer_pausen.setHMS(0,0,0);
     bool begin_gesetzt = false;
     for(int i=0;i<tab_import.anz_zeilen();i++)
     {
         QString kst = tab_import.wert(i, INDEX_ARBZEIT_KST);
-        QString zeit = tab_import.wert(i, INDEX_ARBZEIT_UHRZEIT);
+
+        //Beginn der Arbeitszeit ermitteln:
         if(kst != "000")
         {
             if(begin_gesetzt == false)
             {
-                az_begin = text_zu_qtime(zeit);
+                az_begin = text_zu_qtime(tab_import.wert(i, INDEX_ARBZEIT_UHRZEIT));
                 begin_gesetzt = true;
             }
-        }else
+        }
+
+        //Feierabend ermitteln:
+        if(i == tab_import.anz_zeilen()-1 )
         {
-            az_ende = text_zu_qtime(zeit);
+            if(kst == "000")
+            {
+                az_ende = text_zu_qtime(tab_import.wert(i, INDEX_ARBZEIT_UHRZEIT));
+            }else
+            {
+                Dialog_zeitabfrage dlg;
+                dlg.setWindowTitle("Feierabend nicht gebucht");
+                dlg.set_labeltext("Der Feierabend wurde nicht erfasst!\nWann wurde feierabend gemacht?");
+                QTime default_time;
+                default_time.setHMS(15,0,0);
+                dlg.set_default_time(default_time);
+                if(dlg.exec() == QDialog::Accepted)
+                {
+                    az_ende = dlg.zeit();
+                }else
+                {
+                    QMessageBox mb;
+                    mb.setText("Tageszettel kann ohne bekannten Feierabend nicht erstellt werden.");
+                    mb.setWindowTitle("Tageszettel erstellen");
+                    mb.exec();
+                    tabelle_qstring tab_ret;
+                    return tab_ret;//leere tabelle
+                }
+            }
+        }
+
+        //Pausendauer ermitteln:
+        if(i < tab_import.anz_zeilen() - 2)
+        {
+            if(kst == "000")
+            {
+                QTime begin_pause, ende_pause, dauer;
+                begin_pause = text_zu_qtime(tab_import.wert(i, INDEX_ARBZEIT_UHRZEIT));
+                ende_pause = text_zu_qtime(tab_import.wert(i+1, INDEX_ARBZEIT_UHRZEIT));
+                dauer = ende_pause - begin_pause;
+                dauer_pausen = dauer_pausen + dauer;
+            }
         }
     }
-    dauer_anwesenheit = minus(az_ende, az_begin);
+    dauer_anwesenheit = az_ende - az_begin;
+    az_dauer = dauer_anwesenheit - dauer_pausen;
 
     QString msg;
-    msg = az_begin.toString();
-    msg += "\n";
+    msg = "Start:\t";
+    msg += az_begin.toString();
+    msg += "\nEnde:\t";
     msg += az_ende.toString();
-    msg += "\n";
+    msg += "\nAnwes:\t";
     msg += dauer_anwesenheit.toString();
+    msg += "\nPause:\t";
+    msg += dauer_pausen.toString();
+    msg += "\nArbeit:\t";
+    msg += az_dauer.toString();
+
     QMessageBox mb;
     mb.setText(msg);
     mb.exec();
