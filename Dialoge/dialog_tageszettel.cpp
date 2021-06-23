@@ -59,12 +59,19 @@ void Dialog_tageszettel::resizeEvent(QResizeEvent *event)
     ui->tableWidget_import->setFixedWidth(b_tab_import);
 
     b_tab_tagzet = b_tab_tagzet - ui->pushButton_tagzet_erstellen->width() - 5;
+    int b_report = b_tab_tagzet;
+    b_tab_tagzet = b_tab_tagzet / 8 * 5;
+    b_report = b_report - b_tab_tagzet - 5;
     ui->tableWidget_tagzet->move(ui->label_mitarb->x(),ui->tableWidget_import->y()+ui->tableWidget_import->height()+5);
     int h_tab_tagzet = this->height() - ui->tableWidget_tagzet->y() - rand_un;
     ui->tableWidget_tagzet->setFixedHeight(h_tab_tagzet);
     ui->tableWidget_tagzet->setFixedWidth(b_tab_tagzet);
 
-    ui->pushButton_tagzet_erstellen->move(ui->tableWidget_tagzet->x()+b_tab_tagzet+5, ui->tableWidget_tagzet->y());
+    ui->plainTextEdit_report->move(ui->tableWidget_tagzet->x()+b_tab_tagzet+5, ui->tableWidget_tagzet->y());
+    ui->plainTextEdit_report->setFixedWidth(b_report);
+    ui->plainTextEdit_report->setFixedHeight(ui->tableWidget_tagzet->height());
+
+    ui->pushButton_tagzet_erstellen->move(ui->plainTextEdit_report->x()+b_report+5, ui->tableWidget_tagzet->y());
 
     QDialog::resizeEvent(event);
 }
@@ -236,7 +243,9 @@ void Dialog_tageszettel::on_pushButton_tagzet_erstellen_clicked()
             {
                 QDate datum = ui->calendarWidget->selectedDate();
                 Arbzeit->import();
-                Tab_tagzet = Arbzeit->tagzet(idscan, datum);
+                QString report;
+                Tab_tagzet = Arbzeit->tagzet(idscan, datum, report);
+                ui->plainTextEdit_report->setPlainText(report);
                 ui->tableWidget_tagzet->clear();
                 ui->tableWidget_tagzet->setColumnCount(Tab_tagzet.anz_spalten());//Spaltenanzahl
                 ui->tableWidget_tagzet->setRowCount(Tab_tagzet.anz_zeilen());//Zeilenanzahl

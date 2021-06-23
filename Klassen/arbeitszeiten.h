@@ -22,7 +22,7 @@ public:
     text_zeilenweise tabelle_tz();
     tabelle_qstring *tabelle();
     tabelle_qstring tabelle(QString idscan, QDate von, QDate bis);
-    tabelle_qstring tagzet(QString idscan, QDate tag);
+    tabelle_qstring tagzet(QString idscan, QDate tag, QString& report);
 
 private:
     tabelle_qstring ArbZeit;

@@ -136,7 +136,7 @@ tabelle_qstring arbeitszeiten::tabelle(QString idscan, QDate von, QDate bis)
     }
     return tab;
 }
-tabelle_qstring arbeitszeiten::tagzet(QString idscan, QDate tag)
+tabelle_qstring arbeitszeiten::tagzet(QString idscan, QDate tag, QString& report)
 {
     tabelle_qstring tab_ret, tab_import;
     tab_import = tabelle(idscan, tag, tag);
@@ -202,21 +202,49 @@ tabelle_qstring arbeitszeiten::tagzet(QString idscan, QDate tag)
     dauer_anwesenheit = az_ende - az_begin;
     az_dauer = dauer_anwesenheit - dauer_pausen;
 
-    QString msg;
-    msg = "Start:\t";
-    msg += az_begin.toString();
-    msg += "\nEnde:\t";
-    msg += az_ende.toString();
-    msg += "\nAnwes:\t";
-    msg += dauer_anwesenheit.toString();
-    msg += "\nPause:\t";
-    msg += dauer_pausen.toString();
-    msg += "\nArbeit:\t";
-    msg += az_dauer.toString();
+    report = "Ersteller des Reports:";
+    report += "\n";
+    report += "user xy";
+    report += "\n";
+    report += "Erstellt am:";
+    report += "\n";
+    report += int_to_qstring(QDate::currentDate().year());
+    report += ".";
+    report += int_to_qstring(QDate::currentDate().month());
+    report += ".";
+    report += int_to_qstring(QDate::currentDate().day());
+    report += "\n";
+    report += "\n";
+    report += az_begin.toString();
+    report += " Arbeitsbegin";
+    report += "\n";
+    report += az_ende.toString();
+    report += " Feierabend";
+    report += "\n";
+    report += "\n";
+    report += dauer_anwesenheit.toString();
+    report += " Anwesenheitszeit";
+    report += "\n";
+    report += "\n";
+    report += dauer_pausen.toString();
+    report += " Dauer Pause";
+    QTime mindpause;
+    mindpause.setHMS(0,55,0);
+    if(dauer_pausen < mindpause)
+    {
+        report += "\tAchtung eventuell Pause nicht gescannt!";
+    }
+    report += "\n";
+    report += "\n";
+    report += az_dauer.toString();
+    report += " Dauer Arbeit";
+    report += "\n";
 
-    QMessageBox mb;
-    mb.setText(msg);
-    mb.exec();
+    //Projektzeiten ermitteln:
+    for(int i=0;i<tab_import.anz_zeilen();i++)
+    {
+
+    }
 
     return tab_ret;
 }
