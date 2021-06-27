@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     Dlg_azimport.setParent(this);
     Dlg_tagzet.setParent(this);
-    Dlg_azimport.hide();
+    Dlg_KoSt.setParent(this);
+    on_actionTageszettel_triggered();
 
     KoSt.initialisieren();
     Mitarb.initialisieren();
@@ -45,6 +46,9 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     Dlg_tagzet.move(0,20);
     Dlg_tagzet.setFixedSize(this->width(), this->height());
 
+    Dlg_KoSt.move(0,20);
+    Dlg_KoSt.setFixedSize(this->width(), this->height());
+
     QMainWindow::resizeEvent(event);
 }
 void MainWindow::slot_kost(kostenstellen k)
@@ -58,6 +62,8 @@ void MainWindow::slot_mitarb(mitarbeiter m)
 }
 void MainWindow::on_actionKostenstellen_triggered()
 {
+    Dlg_azimport.hide();
+    Dlg_tagzet.hide();
     Dlg_KoSt.show();
 }
 void MainWindow::on_actionMitarbeiter_triggered()
@@ -67,11 +73,13 @@ void MainWindow::on_actionMitarbeiter_triggered()
 void MainWindow::on_actionTageszettel_triggered()
 {
     Dlg_azimport.hide();
+    Dlg_KoSt.hide();
     Dlg_tagzet.show();
 }
 void MainWindow::on_actionImport_Uebersicht_triggered()
 {
     Dlg_tagzet.hide();
+    Dlg_KoSt.hide();
     Dlg_azimport.show();
 }
 

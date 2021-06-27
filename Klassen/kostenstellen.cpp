@@ -5,6 +5,7 @@ kostenstellen::kostenstellen()
     liste_QString tabkopf;
     tabkopf.anhaengen("Nummer");
     tabkopf.anhaengen("Bezeichnung");
+    tabkopf.anhaengen("Gemeinosten");
     KoSt.set_tabkopf(tabkopf);
 }
 
@@ -130,6 +131,26 @@ bool kostenstellen::set_bez(QString nr, QString bez)
     }
     return retbool;
 }
+bool kostenstellen::set_gk(QString nr, bool ist_gk)
+{
+    bool retbool = true;//es gab einen Fehler
+    for(int i=0;i<KoSt.anz_zeilen();i++)
+    {
+        if(nr == KoSt.wert(i, INDEX_KOST_NUMMER))
+        {
+            retbool = false;//es gab keinen Fehler
+            if(ist_gk == true)
+            {
+                KoSt.set_wert(i, INDEX_KOST_GK, "1");
+            }else
+            {
+                KoSt.set_wert(i, INDEX_KOST_GK, "0");
+            }
+            break;
+        }
+    }
+    return retbool;
+}
 void kostenstellen::sortieren()
 {
     KoSt.sortieren_double(INDEX_KOST_NUMMER);
@@ -173,4 +194,21 @@ QString kostenstellen::bez(QString nr)
         }
     }
     return bez;
+}
+bool kostenstellen::gk(QString nr)
+{
+    bool gk = false;
+    for(int i=0;i<KoSt.anz_zeilen();i++)
+    {
+        if(nr == KoSt.wert(i, INDEX_KOST_NUMMER))
+        {
+            QString tmp = KoSt.wert(i, INDEX_KOST_GK);
+            if(tmp == "1")
+            {
+                gk = true;
+            }
+            break;
+        }
+    }
+    return gk;
 }

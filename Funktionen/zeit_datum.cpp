@@ -9,6 +9,15 @@ QTime text_zu_qtime(QString s)
         h = text_links(s,":");
         min = text_rechts(s,":");
         t.setHMS(h.toInt(), min.toInt(), 0);
+    }else if((s.count() == 2+1+2+1+2) && (s.at(2) == ":") && (s.at(5) == ":")) //z.B.: 10:30:00
+    {
+        QString h, min, sekunden;
+        h = text_links(s,":");
+        QString trenner = ":";
+        QString rest = text_rechts(s, h+trenner);
+        min = text_links(rest,":");
+        sekunden = text_rechts(rest, min+trenner);
+        t.setHMS(h.toInt(), min.toInt(), sekunden.toInt());
     }
     return t;
 }
@@ -63,7 +72,7 @@ QTime operator +(QTime t1, QTime t2)
 {
     QTime ret_time;
     int h1 = t1.hour();
-    int h2 = t1.hour();
+    int h2 = t2.hour();
     int min1 = t1.minute();
     int min2 = t2.minute();
     int h = h1 + h2;

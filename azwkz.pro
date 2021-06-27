@@ -25,6 +25,7 @@ SOURCES += \
     Klassen/mitarbeiter.cpp \
     Klassen/prgpfade.cpp \
     Klassen/tabelle_qstring.cpp \
+    Klassen/tageszettel.cpp \
     Klassen/text_zeilenweise.cpp \
     Dialoge/dialog_kostenstellen.cpp \
     main.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     Klassen/mitarbeiter.h \
     Klassen/prgpfade.h \
     Klassen/tabelle_qstring.h \
+    Klassen/tageszettel.h \
     Klassen/text_zeilenweise.h \
     ToDo.h \
     Dialoge/dialog_kostenstellen.h \

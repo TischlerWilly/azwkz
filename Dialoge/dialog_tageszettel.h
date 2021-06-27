@@ -28,9 +28,7 @@ public:
 
 private slots:
     void on_tableWidget_mitarb_cellClicked(int row, int column);
-
     void on_calendarWidget_clicked(const QDate &date);
-
     void on_pushButton_tagzet_erstellen_clicked();
 
 private:

@@ -79,6 +79,10 @@ void Dialog_tageszettel::resizeEvent(QResizeEvent *event)
 void Dialog_tageszettel::set_Mitarb(mitarbeiter *m)
 {
     Mitarb = m;
+    if(Arbzeit != NULL)
+    {
+        Arbzeit->set_MitArb(m);
+    }
     update_tab_mitarb();
 }
 void Dialog_tageszettel::set_Arbzeit(arbeitszeiten *az)
@@ -88,6 +92,10 @@ void Dialog_tageszettel::set_Arbzeit(arbeitszeiten *az)
 void Dialog_tageszettel::set_KoSt(kostenstellen *kst)
 {
     KoSt = kst;
+    if(Arbzeit != NULL)
+    {
+        Arbzeit->set_KoSt(kst);
+    }
     update_tab_kost();
 }
 
@@ -244,6 +252,7 @@ void Dialog_tageszettel::on_pushButton_tagzet_erstellen_clicked()
                 QDate datum = ui->calendarWidget->selectedDate();
                 Arbzeit->import();
                 QString report;
+                Arbzeit->set_MitArb(Mitarb);
                 Tab_tagzet = Arbzeit->tagzet(idscan, datum, report);
                 ui->plainTextEdit_report->setPlainText(report);
                 ui->tableWidget_tagzet->clear();

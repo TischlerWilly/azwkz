@@ -5,8 +5,11 @@
 
 #include "Klassen/tabelle_qstring.h"
 #include "Klassen/prgpfade.h"
+#import "Klassen/kostenstellen.h"
 #include "Funktionen/dateien.h"
 #include "Dialoge/dialog_zeitabfrage.h"
+#include "Klassen/tageszettel.h"
+#include "Klassen/mitarbeiter.h"
 
 class arbeitszeiten
 {
@@ -18,6 +21,8 @@ public:
     bool del(liste_QString z);
     void clear();
     void import();
+    void set_KoSt(kostenstellen *kst);
+    void set_MitArb(mitarbeiter *ma);
 
     text_zeilenweise tabelle_tz();
     tabelle_qstring *tabelle();
@@ -26,7 +31,8 @@ public:
 
 private:
     tabelle_qstring ArbZeit;
-
+    kostenstellen *KoSt;
+    mitarbeiter *MitArb;
 
 };
 

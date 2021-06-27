@@ -8,7 +8,9 @@ arbeitszeiten::arbeitszeiten()
     tabkopf.anhaengen("Uhrzeit");
     tabkopf.anhaengen("Projekt");
     tabkopf.anhaengen("Kostenstelle");
-    ArbZeit.set_tabkopf(tabkopf);
+    ArbZeit.set_tabkopf(tabkopf);    
+    KoSt = NULL;
+    MitArb = NULL;
 }
 
 //-----------------public:
@@ -91,6 +93,14 @@ void arbeitszeiten::import()
             add(zeile);
         }
     }
+}
+void arbeitszeiten::set_KoSt(kostenstellen *kst)
+{
+    KoSt = kst;
+}
+void arbeitszeiten::set_MitArb(mitarbeiter *ma)
+{
+    MitArb = ma;
 }
 
 //-------------get:
@@ -202,6 +212,37 @@ tabelle_qstring arbeitszeiten::tagzet(QString idscan, QDate tag, QString& report
     dauer_anwesenheit = az_ende - az_begin;
     az_dauer = dauer_anwesenheit - dauer_pausen;
 
+    //-----------------------------------------Projektzeiten ermitteln:
+    QString ma;
+    if(MitArb != NULL)
+    {
+        ma = MitArb->zeile_idscan(idscan).wert(INDEX_MITARB_NUMMER);
+    }
+
+    tageszettel tageszet(ma, tag.toString("yyyy.MM.dd"));
+    tageszet.set_KoSt(KoSt);
+    QString vor_proj = tab_import.wert(0, INDEX_ARBZEIT_PROJEKT);
+    QString vor_kst = tab_import.wert(0, INDEX_ARBZEIT_KST);
+    QTime vor_zeit = az_begin;
+    for(int i=1;i<tab_import.anz_zeilen();i++)
+    {
+        QTime zeit = text_zu_qtime(tab_import.wert(i, INDEX_ARBZEIT_UHRZEIT));
+        QTime difzeit = zeit - vor_zeit;
+        tageszet.add(vor_proj, vor_kst, difzeit);
+        vor_proj = tab_import.wert(i, INDEX_ARBZEIT_PROJEKT);
+        vor_kst = tab_import.wert(i, INDEX_ARBZEIT_KST);
+        vor_zeit = zeit;
+        if(i==tab_import.anz_zeilen())
+        {
+            if(tab_import.wert(i, INDEX_ARBZEIT_KST) != "000")//Wenn der Feierabend nicht gescannt wurde
+            {
+                difzeit = az_ende - vor_zeit;
+                tageszet.add(vor_proj, vor_kst, difzeit);
+            }
+        }
+    }
+
+    //-----------------------------------------Report:
     report = "Ersteller des Reports:";
     report += "\n";
     report += "user xy";
@@ -239,14 +280,11 @@ tabelle_qstring arbeitszeiten::tagzet(QString idscan, QDate tag, QString& report
     report += az_dauer.toString();
     report += " Dauer Arbeit";
     report += "\n";
+    report += "\n";
+    report += "Rohling Tageszettel:\n";
+    report += tageszet.tabelle_ohne_pausen().tabelle_tz('\n','\t').text();
 
-    //Projektzeiten ermitteln:
-    for(int i=0;i<tab_import.anz_zeilen();i++)
-    {
-
-    }
-
-    return tab_ret;
+    return tageszet.tabelle_ohne_pausen();
 }
 
 

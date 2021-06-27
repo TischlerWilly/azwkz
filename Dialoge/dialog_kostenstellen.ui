@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>538</width>
-    <height>578</height>
+    <width>729</width>
+    <height>682</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,58 +21,19 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>361</width>
-     <height>501</height>
+     <width>581</width>
+     <height>661</height>
     </rect>
    </property>
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kostenselle löschen: Doppelklick auf die Nr, dann Nr entfernen, dann Enter&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_ok">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>540</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>OK</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_abbrechen">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>540</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Abbrechen</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_neu">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>30</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>neu</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_edit">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>70</y>
+     <x>601</x>
+     <y>60</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -81,17 +42,56 @@
     <string>bearbeiten</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton_neu">
+   <property name="geometry">
+    <rect>
+     <x>601</x>
+     <y>31</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>neu</string>
+   </property>
+  </widget>
   <widget class="QPushButton" name="pushButton_entfernen">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>100</y>
+     <x>601</x>
+     <y>89</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>entfernen</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_abbrechen">
+   <property name="geometry">
+    <rect>
+     <x>601</x>
+     <y>638</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Abbrechen</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_ok">
+   <property name="geometry">
+    <rect>
+     <x>601</x>
+     <y>600</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
    </property>
   </widget>
   <action name="tabelle_sortieren">
@@ -103,6 +103,14 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>tableWidget_kost</tabstop>
+  <tabstop>pushButton_neu</tabstop>
+  <tabstop>pushButton_edit</tabstop>
+  <tabstop>pushButton_entfernen</tabstop>
+  <tabstop>pushButton_ok</tabstop>
+  <tabstop>pushButton_abbrechen</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

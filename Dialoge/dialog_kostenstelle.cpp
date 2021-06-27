@@ -44,6 +44,13 @@ void Dialog_kostenstelle::set_akt_kost(QString nr)
         liste_QString lqs = KoSt->zeile_nr(nr);
         ui->spinBox_nr->setValue(lqs.wert(INDEX_KOST_NUMMER).toInt());
         ui->lineEdit_bez->setText(lqs.wert(INDEX_KOST_BEZEICHUNG));
+        if(lqs.wert(INDEX_KOST_GK) == "1")
+        {
+            ui->checkBox_gk->setChecked(true);
+        }else
+        {
+            ui->checkBox_gk->setChecked(false);
+        }
     }
 }
 void Dialog_kostenstelle::on_pushButton_ok_clicked()
@@ -58,6 +65,12 @@ void Dialog_kostenstelle::on_pushButton_ok_clicked()
     }else
     {
         lqs.anhaengen(ui->lineEdit_bez->text());
+        QString gk = "0";
+        if(ui->checkBox_gk->isChecked())
+        {
+            gk = "1";
+        }
+        lqs.anhaengen(gk);
         if(Modus == MODUS_KST_NEU)
         {
             if(KoSt->add(lqs))//Wenn es einen Fehler gab
@@ -73,12 +86,22 @@ void Dialog_kostenstelle::on_pushButton_ok_clicked()
         {
             QString nr = int_to_qstring(ui->spinBox_nr->value());
             QString bez = ui->lineEdit_bez->text();
+            bool fehler = false;
+            if(KoSt->set_gk(nr, gk.toInt()))
+            {
+                QMessageBox mb;
+                mb.setText("Die Eigenschaft Gemeinkosten der Kostenstelle konnte nicht geändert werden.");
+                mb.exec();
+                fehler = true;
+            }
             if(KoSt->set_bez(nr, bez))//wenn es einen Fehler gab
             {
                 QMessageBox mb;
                 mb.setText("Die Bezeichnung der Kostenstelle konnte nicht geändert werden.");
                 mb.exec();
-            }else
+                fehler = true;
+            }
+            if(fehler == false)
             {
                 this->close();
             }

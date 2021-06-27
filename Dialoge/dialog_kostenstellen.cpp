@@ -44,12 +44,14 @@ void Dialog_Kostenstellen::resizeEvent(QResizeEvent *event)
     ui->tableWidget_kost->setFixedWidth(this->width()-100);
     ui->tableWidget_kost->setFixedHeight(this->height()-30);
 
-    ui->pushButton_ok->move(2+ui->tableWidget_kost->width()/2-2-ui->pushButton_ok->width(), this->height()-25);
-    ui->pushButton_abbrechen->move(ui->pushButton_ok->x()+ui->pushButton_ok->width()+5, ui->pushButton_ok->y());
-
     ui->pushButton_neu->move(this->width()-90, 2);
     ui->pushButton_edit->move(this->width()-90, 2+25+2);
     ui->pushButton_entfernen->move(this->width()-90, 2+(25+2)*2);
+
+    ui->pushButton_ok->move(ui->pushButton_neu->x(), \
+                            ui->tableWidget_kost->y()+ui->tableWidget_kost->height()-100);
+    ui->pushButton_abbrechen->move(ui->pushButton_ok->x(), \
+                                   ui->pushButton_ok->y()+ui->pushButton_ok->height()+5);
 
     QDialog::resizeEvent(event);
 }
